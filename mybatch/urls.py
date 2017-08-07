@@ -15,8 +15,12 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from .views import home
+from .views import dashboard
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),    
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^account/', include('apps.account.urls', namespace="account")),
+    url(r'^config/', include('apps.config.urls', namespace="config")),   
     url(r'^$', home, name = "home"),
+    url(r'^dashboard/', dashboard, name = "dashboard"),
 ]
