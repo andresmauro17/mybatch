@@ -1,0 +1,197 @@
+{% extends 'base_app.html'%}
+{% load staticfiles %}
+
+{% block config_equipo %}
+    <li class="active">
+        <a data-toggle="collapse" href="#configuracion">
+            <i class="material-icons">settings</i>
+            <p>Configuracion
+                <b class="caret"></b>
+            </p>
+        </a>
+        <div class="collapse in" id="configuracion">
+            <ul class="nav">
+                <li class="active">
+                    <a href="{% url 'config:equipment_create' %}">Equipos</a>
+                </li>                       
+            </ul>
+        </div>
+    </li>
+{% endblock config_equipo %} 
+
+{% block container_fluid %}
+
+<div class="row">
+
+	<div class="col-md-12">
+		<div class="card">
+			<form id="form_equipo" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+
+				
+
+                <div class="card-header card-text" data-background-color="blue">
+                      <div class="card-header">
+                          <h4 class="card-title">Crear nuevo equipo</h4>
+                          <p class="category">Ingrese los datos del equipo</p>
+                      </div>
+                      
+                </div>
+
+				<div class="card-content">
+
+					<div class="form-group label-floating">
+						<label class="control-label" for="{{form.codigo.name}}">{{form.codigo.label}}</label>
+						{{form.codigo}}                        
+					</div>
+
+					<div class="form-group label-floating">
+						<label class="control-label" for="{{form.descripcion.name}}">{{form.descripcion.label}}</label>
+						{{form.descripcion}}                        
+					</div>
+					<div class="form-group label-floating">
+						<label class="control-label" for="{{form.marca.name}}">{{form.marca.label}}</label>
+						{{form.marca}}                        
+					</div>
+					<div class="form-group label-floating">
+						<label class="control-label" for="{{form.capacidad_maxima_de_operacion.name}}">{{form.capacidad_maxima_de_operacion.label}}</label>
+						{{form.capacidad_maxima_de_operacion}}                      
+					</div>
+					
+					<div class="row">
+						<legend>Unidad</legend>
+                        <div class="col-lg-4 col-md-4 col-sm-4">	
+							{{form.unidad}}  
+													
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="row">
+						<div class="col-md-4 col-sm-4">
+                            <legend>{{form.ficha_tecnica.label}}</legend>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                       {{form.ficha_tecnica}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+					<div class="form-group">
+						<label class="control-label" {{form.fecha_calibracion.name}}>{{form.fecha_calibracion.label}}</label>
+						{{form.fecha_calibracion}}                     
+					</div>
+
+					<br>
+
+					<div class="row">
+						<div class="col-md-4 col-sm-4">
+                            <legend>Foto 1</legend>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="{% static 'img/image_placeholder.jpg' %}" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                       {{form.foto1}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <legend>Foto 2</legend>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="{% static 'img/image_placeholder.jpg' %}" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                       {{form.foto2}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <legend>Foto 3</legend>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="{% static 'img/image_placeholder.jpg' %}" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                       {{form.foto3}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>					
+					
+						
+				</div>
+			
+				<div class="card-footer text-center">
+	                <button type="submit" class="btn btn-info btn-fill btn-lg">Guardar</button>
+	            </div>
+
+			</form>
+						
+		</div>		
+	</div>
+
+</div>         
+
+   
+    
+
+{% endblock container_fluid %} 
+	
+
+{% block aditional_scripts %}
+
+
+<script type="text/javascript">
+
+function setFormValidation(id){
+    $(id).validate({        
+        errorPlacement: function(error, element) {
+            $(element).parent('div').addClass('has-error');
+         }
+    });
+}
+
+setFormValidation('#form_equipo');
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        
+        demo.initFormExtendedDatetimepickers();
+    });
+
+
+</script>
+	
+{% endblock aditional_scripts %}
+
+	

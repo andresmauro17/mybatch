@@ -62,28 +62,33 @@
                     </div>
                 </div>
                 <ul class="nav">
-                    <li class="active">
-                        <a href="/">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a data-toggle="collapse" href="#componentsExamples">
-                            <i class="material-icons">settings</i>
-                            <p>Parametros
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse" id="componentsExamples">
-                            <ul class="nav">
-                                <li>
-                                    <a href="#">Equipos</a>
-                                </li>                       
-                            </ul>
-                        </div>
-                    </li> 
+                    
+                    {% block Dashboard %}                     
+                        <li>
+                            <a href="/">
+                                <i class="material-icons">dashboard</i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                    {% endblock Dashboard %}
+                    
+                    {% block config_equipo %}
+                        <li>
+                            <a data-toggle="collapse" href="#configuracion">
+                                <i class="material-icons">settings</i>
+                                <p>Configuracion
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="configuracion">
+                                <ul class="nav">
+                                    <li>
+                                        <a href="{% url 'config:equipment_create' %}">Equipos</a>
+                                    </li>                       
+                                </ul>
+                            </div>
+                        </li>
+                    {% endblock config_equipo %} 
                                      
                 </ul>
             </div>
@@ -228,7 +233,8 @@
 <!-- Sliders Plugin -->
 <script src="{% static 'js/nouislider.min.js' %}"></script>
 <!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js"></script>   -->
+
 <!-- Select Plugin -->
 <script src="{% static 'js/jquery.select-bootstrap.js' %}"></script>
 <!--  DataTables.net Plugin    -->
@@ -245,7 +251,10 @@
 <script src="{% static 'js/material-dashboard.js' %}"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="{% static 'js/demo.js' %}"></script>
-<script type="text/javascript">
+
+{% block aditional_scripts %}
+
+<!-- <script type="text/javascript">
     $(document).ready(function() {
 
         // Javascript method's body can be found in assets/js/demos.js
@@ -253,6 +262,10 @@
 
         demo.initVectorMap();
     });
-</script>
+</script> -->
+
+    
+{% endblock aditional_scripts %}
+
 
 </html>
