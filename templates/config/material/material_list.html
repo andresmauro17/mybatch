@@ -1,0 +1,284 @@
+{% extends 'config/material/material_index.html'%}
+{% load staticfiles %}
+
+{% block aditional-css %}
+
+<style>
+
+    .row-icon {
+      visibility: hidden;
+    }
+    tr:hover .row-icon{
+      visibility: visible;
+    }
+
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+</style>
+        
+{% endblock aditional-css %}
+
+{% block config_equipo %}
+    <li class="active">
+        <a data-toggle="collapse" href="#configuracion">
+            <i class="material-icons">settings</i>
+            <p>Configuracion
+                <b class="caret"></b>
+            </p>
+        </a>
+        <div class="collapse in" id="configuracion">
+            <ul class="nav">
+                <li class="active">
+                    <a href="{% url 'config:equipment_create' %}">Equipos</a>
+                </li>                       
+            </ul>
+        </div>
+    </li>
+{% endblock config_equipo %} 
+
+{% block container_fluid %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="blue">
+                <i class="material-icons">assignment</i>
+            </div>            
+            <div class="card-content">
+                <h4 class="card-title">lista de Equipos</h4>
+                <div class="toolbar">
+                    <button class="btn btn-primary btn-just-icon btn-round" onclick="nuevo()">
+                        <i class="material-icons">add</i>
+                    </button>
+                    <h3>Nuevo</h3>
+
+                </div>
+                <div class="material-datatables">
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                        <thead>
+                            <tr>
+                                <td></td>                                
+                                <td><b>Codigo</b></td>
+                                <td><b>Descripcion</b></td>
+                                <td><b>Proveedor</b></td>
+                                <td><b>Fabricante</b></td>
+                                <td><b>UMB</b></td>
+                                <td><b>Ficha</b></td>
+                                <td><b>concentracion</b></td>
+                                <td><b>Lote fb</b></td>
+                                <td><b>vencimiento</b></td>
+                                <td><b>estado</b></td>
+                                <td><b>certificado</b></td>
+                                <td><b>costo</b></td>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td></td>                                
+                                <td>Codigo</td>
+                                <td>Descripcion</td>
+                                <td>Proveedor</td>
+                                <td>Fabricante</td>
+                                <td>UMB</td>
+                                <td>Ficha</td>
+                                <td>concentracion</td>
+                                <td>Lote fb</td>
+                                <td>vencimiento</td>
+                                <td>estado</td>
+                                <td>certificado</td>
+                                <td>costo</td>                     
+                                
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% if object_list %}
+                                {% for  material in object_list%}
+                                    <tr>
+                                        <td> 
+                                            <span class="row-icon">                                   
+                                                <a href="#">
+                                                    <i class="material-icons">create</i>
+                                                </a>
+                                            </span>       
+                                        </td>                               
+                                        <td><a href="{% url 'config:material_edit' material.id%}">{{ material.codigo }}</a></td>
+                                        <td><a href="{% url 'config:material_edit' material.id%}">{{ material.descripcion }}</a></td>
+                                        <td>
+                                            <a href="{% url 'config:material_edit' material.id%}">
+                                                {% for proveedor in material.proveedor.all  %}
+                                                    {{proveedor.nombre_proveedor}}
+                                                {% endfor %}                                                
+                                            </a>
+                                        </td>
+                                        
+
+                                        <td>
+                                            <a href="{% url 'config:material_edit' material.id%}">
+                                                {% for fabricante in material.fabricante.all  %}
+                                                    {{ fabricante.nombre_fabricante}}
+                                                {% endfor %}                                        
+                                            </a>
+                                        </td>
+                                        <td><a href="{% url 'config:material_edit' material.id%}">{{ material.unidad_UMB}}</a></td>
+                                        <td>
+                                            <a href="{{ material.ficha_tecnica }}" target="_blank">
+                                                <span><i class="material-icons">description</i>
+                                                </span>
+                                            </a>
+                                        </td>
+                                        <td><a href="{% url 'config:material_edit' material.id%}">{{ material.concentracion}}</a></td>
+                                        <td><a href="{% url 'config:material_edit' material.id%}">{{ material.N_de_lote_fabricante}}</a></td>
+                                        <td><a href="{% url 'config:material_edit' material.id%}">{{ material.fecha_de_vencimiento}}</a></td>
+                                        <td><a href="{% url 'config:material_edit' material.id%}">{{ material.estado}}</a></td>                                        
+                                        <td>
+                                            <a href="{{ material.certificado_calidad }}" target="_blank">
+                                                <span><i class="material-icons">description</i>
+                                                </span>
+                                            </a>
+                                        </td>
+                                        <td><a href="{% url 'config:material_edit' material.id%}">{{ material.costo_UMB}}</a></td>
+                                    </tr>
+                                {% endfor %}                                
+                            {% else %}
+                                <h1>No a creado ningun material</h1>                          
+                            {% endif %}                            
+                        </tbody>
+                    </table>            
+
+                     
+                </div>
+            </div>            
+        </div>      
+    </div>
+</div>  
+
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+{% endblock container_fluid %} 
+    
+
+{% block aditional_scripts %}
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+$( ".imagen").hide();
+$( ".image-view" ).click(function(){
+    var modal = document.getElementById('myModal');
+    // Get the image and insert it inside the modal - use its "alt" text as a caption    
+    var modalImg = document.getElementById("img01");    
+    console.log($(this).find('img').attr('src'));
+    modal.style.display = "block";
+    modalImg.src = $(this).find('img').attr('src');
+    });
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+    modal.style.display = "none";
+}
+</script>
+
+<script>
+    function nuevo(){        
+        location.href="{% url 'config:material_create' %}";
+    }
+</script>
+
+{% endblock aditional_scripts %}
+
+    
+
