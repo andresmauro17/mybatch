@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from __future__ import absolute_import
 
 from django.db import models
+from apps.account.models import Empresa
 
 # Create your models here.
 
 class Equipo(models.Model):
+	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
 	codigo = models.CharField(max_length=50, unique=True)
 	descripcion = models.CharField(max_length=150)
 	marca = models.CharField(max_length=50, default='no aplica')
@@ -44,12 +47,14 @@ class Equipo(models.Model):
 		return self.codigo
 
 class Proveedor(models.Model):
+	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
 	nombre_proveedor = models.CharField(max_length=150)
 
 	def __str__(self):
 		return self.nombre_proveedor
 
 class Fabricante(models.Model):
+	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
 	nombre_fabricante = models.CharField(max_length=150)
 
 	def __str__(self):
@@ -57,6 +62,7 @@ class Fabricante(models.Model):
 
 
 class Material(models.Model):
+	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
 	codigo = models.CharField(max_length=50, unique=True)
 	descripcion = models.CharField(max_length=150)
 	proveedor = models.ManyToManyField(Proveedor)
@@ -94,6 +100,7 @@ class Material(models.Model):
 		return self.codigo
 
 class Producto(models.Model):
+	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
 	producto = models.CharField(max_length=50)
 	presentacion = models.CharField(max_length=50)
 	materia_prima = models.ManyToManyField(Material)

@@ -6,6 +6,7 @@ class EquipoForm(forms.ModelForm):
 
 	class Meta:
 		model = Equipo
+		exclude = ["empresa"]
 
 		fields = [
 			'codigo', 

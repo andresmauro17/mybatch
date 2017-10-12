@@ -131,6 +131,9 @@
             </div>            
             <div class="card-content">
                 <h4 class="card-title">lista de Equipos</h4>
+                
+                <h4 id="messagetag" style="display : none">{% if messages %}{% for message in messages  %}{{message}}{% endfor %}{% endif %}</h4>
+                
                 <div class="toolbar">
                     <button class="btn btn-primary btn-just-icon btn-round">
                         <i class="material-icons">add</i>
@@ -247,6 +250,19 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() { 
     modal.style.display = "none";
 }
+</script>
+
+<script> 
+    let messagetag = document.getElementById("messagetag").innerHTML;
+    if(messagetag != ""){
+        swal({
+                title: "Genial!",
+                text: messagetag,
+                buttonsStyling: false,
+                confirmButtonClass: "btn btn-success btn-fill",
+                type: "success"
+            });
+    }
 </script>
 
 {% endblock aditional_scripts %}
