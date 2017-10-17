@@ -55,4 +55,12 @@ class EquipementUpdateClass(LoginRequiredMixin, UpdateView):
 	model = Equipo
 	form_class = EquipoForm
 	template_name = 'config/equipement/equipement_edit.html'
-	success_url = reverse_lazy('dashboard')
+	success_url = reverse_lazy('config:equipment_list')
+	success_message = 'equipo registrado de forma exitosa'
+
+	def form_valid(self, form):		
+		self.object = form.save(commit=False)
+		self.object.empresa = Empresa.objects.get(id=self.request.user.cliente.empresa.id)  # use your own profile here
+		self.object.save()
+		messages.success(self.request,self.success_message)
+		return HttpResponseRedirect( self.get_success_url() )

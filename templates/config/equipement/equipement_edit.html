@@ -37,28 +37,48 @@
                         <label class="control-label" for="{{form.marca.name}}">{{form.marca.label}}</label>
                         {{form.marca}}                        
                     </div>
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="{{form.capacidad_maxima_de_operacion.name}}">{{form.capacidad_maxima_de_operacion.label}}</label>
-                        {{form.capacidad_maxima_de_operacion}}                      
-                    </div>
+                    
                     
                     <div class="row">
-                        <legend>Unidad</legend>
-                        <div class="col-lg-4 col-md-4 col-sm-4">    
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="{{form.capacidad_maxima_de_operacion.name}}">{{form.capacidad_maxima_de_operacion.label}}</label>
+                                {{form.capacidad_maxima_de_operacion}}                  
+                            </div>
+                        </div>                        
+                        
+                        <div class="col-lg-4 col-md-4 col-sm-4">                     
+                            <legend>{{form.unidad.label}}</legend>  
                             {{form.unidad}}  
                                                     
                         </div>
                     </div>
                     
                     <br>
-                    
+                    <h4><a href="{{form.instance.ficha_tecnica.url}}">{{form.instance.ficha_tecnica.file}}</a></h4>
                     <div class="row">
-                        <div class="col-md-4 col-sm-4">
-                            <legend>{{form.ficha_tecnica.label}}</legend>
-                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                
+                        <div class="col-md-4 col-sm-4">                      
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">                      
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                 <div>
+                                    <legend>{{form.ficha_tecnica.label}}</legend>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                       {{form.ficha_tecnica}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-md-4 col-sm-4">                      
+                            <div class="fileinput fileinput-exist text-center" data-provides="fileinput">                      
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <legend>{{form.ficha_tecnica.label}}</legend>
                                     <span class="btn btn-default btn-sm btn-round btn-file">
                                         <span class="fileinput-new">Seleccione Archivo</span>
                                         <span class="fileinput-exists">Cambiar</span>
@@ -157,29 +177,28 @@
 
 {% block aditional_scripts %}
 
-
 <script type="text/javascript">
 
 function setFormValidation(id){
     $(id).validate({        
-        errorPlacement: function(error, element) {
-            $(element).parent('div').addClass('has-error');
-         }
+        errorPlacement: function(error, element) {                     
+            $(element).parent('div').addClass('has-error');           
+            $(element).parent().siblings('legend').css({"color": "red"});
+             $(element).addClass('elementttttttttt'); 
+         },
     });
 }
-
 setFormValidation('#form_equipo');
 
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        
+    $(document).ready(function() {        
         demo.initFormExtendedDatetimepickers();
     });
-
-
 </script>
     
 {% endblock aditional_scripts %}
+
+    
 
     

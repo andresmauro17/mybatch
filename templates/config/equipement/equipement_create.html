@@ -43,11 +43,12 @@
                         <div class="col-lg-8 col-md-8 col-sm-8">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="{{form.capacidad_maxima_de_operacion.name}}">{{form.capacidad_maxima_de_operacion.label}}</label>
-                                {{form.capacidad_maxima_de_operacion}}                      
+                                {{form.capacidad_maxima_de_operacion}}                  
                             </div>
                         </div>                        
-						<h4>unidad</h4>
-                        <div class="col-lg-4 col-md-4 col-sm-4">	
+						
+                        <div class="col-lg-4 col-md-4 col-sm-4">                     
+                            <legend>{{form.unidad.label}}</legend> 	
 							{{form.unidad}}  
 													
 						</div>
@@ -57,11 +58,12 @@
 					
 					<div class="row">
 						<div class="col-md-4 col-sm-4">
-                            <legend>{{form.ficha_tecnica.label}}</legend>
+                            
                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                 
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                 <div>
+                                    <legend>{{form.ficha_tecnica.label}}</legend>
                                     <span class="btn btn-default btn-sm btn-round btn-file">
                                         <span class="fileinput-new">Seleccione Archivo</span>
                                         <span class="fileinput-exists">Cambiar</span>
@@ -156,27 +158,31 @@
 
 {% block aditional_scripts %}
 
-
 <script type="text/javascript">
 
 function setFormValidation(id){
     $(id).validate({        
-        errorPlacement: function(error, element) {
-            $(element).parent('div').addClass('has-error');
-         }
+        errorPlacement: function(error, element) {          
+            $(element).parent('div').addClass('has-error');           
+            $(element).parent().siblings('legend').css({"color": "red"});
+            $(error).css({"color": "red"});
+            error.appendTo( element.parent() );
+        },
+    });
+    $.extend($.validator.messages, {
+    required: "este campo es requerido",    
     });
 }
 
+
 setFormValidation('#form_equipo');
+
 
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        
+    $(document).ready(function() {        
         demo.initFormExtendedDatetimepickers();
     });
-
-
 </script>
 	
 {% endblock aditional_scripts %}
