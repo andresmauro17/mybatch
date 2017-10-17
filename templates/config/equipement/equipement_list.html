@@ -134,7 +134,9 @@
                                 <td><b>ficha</b></td>
                                 <td><b>calibracion</b></td>
                                 <td><b>Estado</b></td>
-                                <td><b>imagen</b></td>
+                                <td><b>foto1</b></td>
+                                <td><b>foto2</b></td>
+                                <td><b>foto3</b></td>
                                 
                             </tr>
                         </thead>
@@ -148,7 +150,9 @@
                                 <td>ficha</td>
                                 <td>calibracion</td>
                                 <td>Estado</td>
-                                <td>imagen</td>                     
+                                <td>foto1</td>
+                                <td>foto2</td> 
+                                <td>foto3</td>                      
                                 
                             </tr>
                         </tfoot>
@@ -169,31 +173,66 @@
                                         <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.marca }}</a></td>
                                         <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.capacidad_maxima_de_operacion}} {{equipo.unidad}}</a></td>
                                         <td>
-                                            <a href="{{ equipo.ficha_tecnica }}" target="_blank">
+                                            <a href="{{ equipo.ficha_tecnica.url }}" target="_blank">
                                                 <span><i class="material-icons">description</i>
                                                 </span>
                                             </a>
                                         </td>
                                         <td>{{ equipo.fecha_calibracion }}</td>
-                                        <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.estado }}</a></td>
+                                        <td>
+                                            <a href="{% url 'config:equipement_edit' equipo.id%}">
+                                             {% if equipo.estado == "A" %}
+                                                Activo                                                 
+                                             {% elif equipo.estado == "I" %}
+                                                Inactivo
+                                             {% elif equipo.estado == "M"  %}
+                                                Mantenimiento
+                                             {% else %}
+                                                ----                                            
+                                             {% endif %}
+
+                                            </a>
+                                        </td>
                                         <td class="icono-imagen"> 
                                             <a href="#">
-
                                             {% if equipo.foto1 %}
                                                 <span class="image-view">
-                                                    <i class="material-icons">image</i>           
-                                                
-                                                     <img class="imagen" id="myImg" src="{{ equipo.foto1.url }}" width="10" height="10">                                      
-                                                                                    
-                                                
-                                                </span>
- 
+                                                    <i class="material-icons">image</i>                                             
+                                                     <img class="imagen" id="myImg" src="{{ equipo.foto1.url }}" width="10" height="10"> 
+                                                </span> 
                                             {% else %}
                                                 <span class="image-view">
                                                    <i class="material-icons">visibility_off</i>
                                                 </span>
-                                            {% endif %}  
-                                                                                                
+                                            {% endif %}               
+                                            </a>                                           
+                                        </td>
+                                         <td class="icono-imagen"> 
+                                            <a href="#">
+                                            {% if equipo.foto2 %}
+                                                <span class="image-view">
+                                                    <i class="material-icons">image</i>                                             
+                                                     <img class="imagen" id="myImg" src="{{ equipo.foto2.url }}" width="10" height="10"> 
+                                                </span> 
+                                            {% else %}
+                                                <span class="image-view">
+                                                   <i class="material-icons">visibility_off</i>
+                                                </span>
+                                            {% endif %}               
+                                            </a>                                           
+                                        </td>
+                                        <td class="icono-imagen"> 
+                                            <a href="#">
+                                            {% if equipo.foto3 %}
+                                                <span class="image-view">
+                                                    <i class="material-icons">image</i>                                             
+                                                     <img class="imagen" id="myImg" src="{{ equipo.foto3.url }}" width="10" height="10"> 
+                                                </span> 
+                                            {% else %}
+                                                <span class="image-view">
+                                                   <i class="material-icons">visibility_off</i>
+                                                </span>
+                                            {% endif %}               
                                             </a>                                           
                                         </td>                                    
                                     </tr>
