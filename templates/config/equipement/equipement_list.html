@@ -171,12 +171,17 @@
                                         <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.codigo }}</a></td>
                                         <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.descripcion }}</a></td>
                                         <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.marca }}</a></td>
-                                        <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.capacidad_maxima_de_operacion}} {{equipo.unidad}}</a></td>
+                                        <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.capacidad_maxima_de_operacion}} {{equipo.unidad}}</a></td>                           
                                         <td>
-                                            <a href="{{ equipo.ficha_tecnica.url }}" target="_blank">
-                                                <span><i class="material-icons">description</i>
-                                                </span>
-                                            </a>
+                                            {% if equipo.ficha_tecnica %}
+                                                <a href="{{ equipo.ficha_tecnica.url }}" target="_blank">
+                                                    <span><i class="material-icons">description</i>
+                                                    </span>
+                                                </a> 
+                                            {% else %}
+                                                <span><i class="material-icons">clear</i></span>                                          
+                                            {% endif %}
+
                                         </td>
                                         <td>{{ equipo.fecha_calibracion }}</td>
                                         <td>

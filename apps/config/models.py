@@ -25,7 +25,7 @@ class Equipo(models.Model):
 	    choices=UNIDAD_CHOICES,	    
 	)
 	
-	ficha_tecnica = models.FileField(upload_to='pdf/config/equipo')
+	ficha_tecnica = models.FileField(upload_to='pdf/config/equipo', blank=True)
 	fecha_calibracion = models.DateField(blank=True, null=True)
 	ESTADO_CHOICES = (
 	    ('M', 'En mantenimiento'),

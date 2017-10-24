@@ -56,7 +56,7 @@ class EquipementUpdateClass(LoginRequiredMixin, UpdateView):
 	form_class = EquipoForm
 	template_name = 'config/equipement/equipement_edit.html'
 	success_url = reverse_lazy('config:equipment_list')
-	success_message = 'equipo registrado de forma exitosa'
+	success_message = 'equipo actualizado de forma exitosa'
 
 	def form_valid(self, form):		
 		self.object = form.save(commit=False)

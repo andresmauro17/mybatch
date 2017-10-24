@@ -1,23 +1,17 @@
 {% extends 'config/equipement/equipement_index.html'%}
 {% load staticfiles %}
 
-
-
 {% block container_fluid %}
 
 <div class="row">
-
 	<div class="col-md-12">
 		<div class="card">
 			<form id="form_equipo" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-				{% csrf_token %}
-
-				
+				{% csrf_token %}				
 
                 <div class="card-header card-text" data-background-color="blue">
                       <div class="card-header">
-                          <h4 class="card-title">Crear nuevo equipo</h4>
-                          <p class="category">Ingrese los datos del equipo</p>
+                          <h4 class="card-title">Añadir equipo</h4>
                       </div>
                       
                 </div>
@@ -43,24 +37,21 @@
                         <div class="col-lg-8 col-md-8 col-sm-8">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="{{form.capacidad_maxima_de_operacion.name}}">{{form.capacidad_maxima_de_operacion.label}}</label>
-                                {{form.capacidad_maxima_de_operacion}}                  
+                                {{form.capacidad_maxima_de_operacion}}          
                             </div>
                         </div>                        
 						
-                        <div class="col-lg-4 col-md-4 col-sm-4">                     
+                        <div class="col-lg-4 col-md-4 col-sm-4">               
                             <legend>{{form.unidad.label}}</legend> 	
-							{{form.unidad}}  
-													
+							{{form.unidad}} 								
 						</div>
 					</div>
 					
 					<br>
 					
 					<div class="row">
-						<div class="col-md-4 col-sm-4">
-                            
-                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                
+						<div class="col-md-4 col-sm-4">                        
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">        
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                 <div>
                                     <legend>{{form.ficha_tecnica.label}}</legend>
