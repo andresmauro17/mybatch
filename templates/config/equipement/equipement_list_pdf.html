@@ -1,0 +1,175 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+     <head>
+         <title>Title</title>
+         <style type="text/css">
+
+                @page {
+                     size: a4 portrait;
+                    @frame header_frame {           /* Static Frame */
+                        -pdf-frame-content: header_content;
+                        left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+                    }
+                    @frame content_frame {          /* Content Frame */
+                        left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+                    }
+                    @frame footer_frame {           /* Another static Frame */
+                        -pdf-frame-content: footer_content;
+                        left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+                    }
+                }
+                         
+            body {
+                 font-weight: 200;
+                 font-size: 14px;
+             }
+             .header {
+                 font-size: 20px;
+                 font-weight: 100;
+                 text-align: center;
+                 color: #007cae;
+             }
+             .title {
+                 font-size: 22px;
+                 font-weight: 100;
+                /* text-align: right;*/
+                padding: 10px 20px 0px 20px;  
+             }
+             .title span {
+                 color: #007cae;
+             }
+             .details {
+                 padding: 10px 20px 0px 20px;
+                 text-align: left !important;
+                 /*margin-left: 40%;*/
+             }
+             .hrItem {
+                 border: none;
+                 height: 1px;
+                 /* Set the hr color */
+                 color: #333; /* old IE */
+                 background-color: #fff; /* Modern Browsers */
+             }
+             .details {
+                 padding: 10px 20px 0px 20px;
+                 text-align: right !important;
+                 /*margin-left: 40%;*/
+             }
+
+         </style>
+     </head>
+     <body>
+
+         <!-- Content for Static Frame 'header_frame' -->
+        <div id="header_content">Reporte generado por <a href="smartbatch">smartbatch.com</a></div>
+         
+         <div class='wrapper'>
+             <div class='header'>
+                 <p class='title'>Reporte de equipos configurados</p>
+             </div>
+         <div>
+             <div class='details'>
+                 Generado por:{{user.first_name}} {{user.last_name}} <br/>
+                 Empresa: {{user.cliente.empresa}}<br/>
+                 Fecha y hora: {{date_time}}
+                 <hr class='hrItem' />
+             </div>
+
+                {% if object_list %}
+                    {% for  equipo in object_list%}         
+                        <h4>hola{{ equipo.codigo }}</h4>
+                    {% endfor %}        
+                {% endif %}
+                
+
+                 <table>
+                        <thead>
+                            <tr>
+                                <td></td>                                
+                                <td><b>Codigo</b></td>
+                                <td><b>Descripcion</b></td>
+                                <td><b>Marca</b></td>
+                                <td><b>Capacidad unidad</b></td>
+                                <td><b>ficha</b></td>
+                                <td><b>calibracion</b></td>
+                                <td><b>Estado</b></td>
+                                <td><b>foto1</b></td>
+                                <td><b>foto2</b></td>
+                                <td><b>foto3</b></td>
+                                
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td></td>                                
+                                <td>Codigo</td>
+                                <td>Descripcion</td>
+                                <td>Marca</td>
+                                <td>Capacidad unidad</td>
+                                <td>ficha</td>
+                                <td>calibracion</td>
+                                <td>Estado</td>
+                                <td>foto1</td>
+                                <td>foto2</td> 
+                                <td>foto3</td>                      
+                                
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% if object_list %}
+                                {% for  equipo in object_list%}
+                                    <tr>
+                                                                     
+                                        <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.codigo }}</a></td>
+                                        <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.descripcion }}</a></td>
+                                        <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.marca }}</a></td>
+                                        <td><a href="{% url 'config:equipement_edit' equipo.id%}">{{ equipo.capacidad_maxima_de_operacion}} {{equipo.unidad}}</a></td>                           
+                                        <td>
+                                            {% if equipo.ficha_tecnica %}
+                                                <a href="{{ equipo.ficha_tecnica.url }}" target="_blank">
+                                                    <span><i class="material-icons">description</i>
+                                                    </span>
+                                                </a> 
+                                            {% else %}
+                                                <span><i class="material-icons">clear</i></span>                                          
+                                            {% endif %}
+
+                                        </td>
+                                        <td>{{ equipo.fecha_calibracion }}</td>
+                                        <td>
+                                            <a href="{% url 'config:equipement_edit' equipo.id%}">
+                                             {% if equipo.estado == "A" %}
+                                                Activo                                                 
+                                             {% elif equipo.estado == "I" %}
+                                                Inactivo
+                                             {% elif equipo.estado == "M"  %}
+                                                Mantenimiento
+                                             {% else %}
+                                                ----                                            
+                                             {% endif %}
+
+                                            </a>
+                                        </td>
+                                                                           
+                                    </tr>
+                                {% endfor %}                                
+                            {% else %}
+                                <h1>No a creado ningun equipo</h1>                          
+                            {% endif %}                            
+                        </tbody>
+                    </table>
+
+
+
+
+
+        </div>
+       
+            <!-- Content for Static Frame 'footer_frame' -->
+        <div id="footer_content">pagina <pdf:pagenumber>
+            de <pdf:pagecount>  
+            
+        </div>
+
+     </body>
+ </html>

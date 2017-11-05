@@ -1,0 +1,39 @@
+{% extends 'config/equipement/equipement_index.html'%}
+{% load staticfiles %}
+
+{% block container_fluid %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">            
+
+            <div class="card-content text-center">
+                <form method="post">
+                    {% csrf_token %}
+                    <h3>Seguro que Desea eliminar el equipo:</h3>
+                    <h4><b>{{object.codigo}} {{object.descripcion}}</b>, del registro</h4>
+                    <button class="btn btn-danger">eliminar</button>
+                    <a class="btn btn-default" href="{% url 'config:equipement_edit' object.id %}">cancelar</a>                     
+                </form>
+            </div>
+                 
+        </div>      
+    </div>
+
+</div>         
+
+   
+    
+
+{% endblock container_fluid %} 
+    
+
+{% block aditional_scripts %}
+
+
+
+{% endblock aditional_scripts %}
+
+    
+
+    

@@ -115,7 +115,7 @@
             <div class="card-content">
                 <h4 class="card-title">lista de Equipos</h4>
                 
-                <h4 id="messagetag" style="display : none">{% if messages %}{% for message in messages  %}{{message}}{% endfor %}{% endif %}</h4>
+                <h4 id="messagetag" >{% if messages %}{% for message in messages  %}{{message}}{% endfor %}{% endif %}</h4>
                 
                 <div class="toolbar">                 
                     <button onclick="location.href='{% url 'config:equipment_create' %}'" class="btn btn-danger btn-just-icon btn-round pull-right">

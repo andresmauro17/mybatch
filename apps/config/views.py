@@ -7,9 +7,14 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
+from django.views.generic import DeleteView
+from django.views.generic import View
+
 
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
+
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -19,7 +24,11 @@ from .models import Equipo
 
 from apps.account.models import Empresa
 
+from mybatch.utils import render_to_pdf
+
 from .forms import EquipoForm
+from django.utils import timezone
+
 
 def equipement_index(request):
 	return render(request, 'config/equipement/equipement_index.html', {})
@@ -64,3 +73,27 @@ class EquipementUpdateClass(LoginRequiredMixin, UpdateView):
 		self.object.save()
 		messages.success(self.request,self.success_message)
 		return HttpResponseRedirect( self.get_success_url() )
+
+class EquipementDelete(LoginRequiredMixin,DeleteView):
+	login_url = 'account:login'
+	model = Equipo	
+	template_name = 'config/equipement/equipement_delete.html'
+	success_url = reverse_lazy('config:equipment_list')
+	
+
+
+class GeneratePdf(LoginRequiredMixin, ListView):
+     login_url = 'account:login'
+     model = Equipo
+     def get(self, request, *args, **kwargs):     	      	 
+         data = {
+             'amount': 39.99,
+             'customer_name': 'Cooper Mann',
+             'order_id': 1233434,
+             'user':self.request.user,
+             'date_time':timezone.now(),
+             'object_list':Equipo.objects.filter(empresa=self.request.user.cliente.empresa.id),
+         }
+         pdf = render_to_pdf('config/equipement/equipement_list_pdf.html', data)
+         return HttpResponse(pdf, content_type='application/pdf')
+
