@@ -78,7 +78,7 @@ class Material(models.Model):
 	    max_length=5,
 	    choices=UNIDAD_CHOICES,	    
 	)
-	ficha_tecnica = models.FileField(upload_to='pdf/config/material/ficha_tecnica')
+	ficha_tecnica = models.FileField(upload_to='pdf/config/material/ficha_tecnica', blank=True)
 	concentracion = models.CharField(max_length=50, blank=True, null=True) 
 	N_de_lote_fabricante = models.CharField(max_length=50, blank=True, null=True) 
 	fecha_de_vencimiento = models.DateField(blank=True, null=True)
@@ -93,7 +93,7 @@ class Material(models.Model):
 	    blank=True,
 	    null=True
 	)	
-	ficha_tecnica = models.FileField(upload_to='pdf/config/material/certificado_calidad')
+	certificado_calidad = models.FileField(upload_to='pdf/config/material/certificado_calidad', blank=True, null=True)
 	costo_UMB = models.CharField(max_length=150)
 
 	def __str__(self):

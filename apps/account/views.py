@@ -16,6 +16,9 @@ from django.contrib.auth.decorators import login_required
 # def LoginClass(request):
 # 	return render(request, 'account/login.html')
 
+def RegisterClass(request):
+	return render(request, 'account/register.html')
+
 
 class LoginClass(View):
 	form = LoginUserForm()

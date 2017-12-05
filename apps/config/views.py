@@ -30,14 +30,14 @@ from .forms import EquipoForm
 from django.utils import timezone
 
 
-def equipement_index(request):
-	return render(request, 'config/equipement/equipement_index.html', {})
+def equipment_index(request):
+	return render(request, 'config/equipment/equipment_index.html', {})
 
 
-class EquipementCreateClass(LoginRequiredMixin, CreateView):
+class EquipmentCreateClass(LoginRequiredMixin, CreateView):
 	login_url = 'account:login'
 	model = Equipo
-	template_name = 'config/equipement/equipement_create.html'
+	template_name = 'config/equipment/equipment_create.html'
 	form_class = EquipoForm
 	success_url = reverse_lazy('config:equipment_list')
 	success_message = 'equipo registrado de forma exitosa'
@@ -49,21 +49,21 @@ class EquipementCreateClass(LoginRequiredMixin, CreateView):
 		messages.success(self.request,self.success_message)
 		return HttpResponseRedirect( self.get_success_url() )
 
-class EquipementListClass(LoginRequiredMixin, ListView):
+class EquipmentListClass(LoginRequiredMixin, ListView):
 	login_url = 'account:login'
 	model = Equipo 
-	template_name = 'config/equipement/equipement_list.html'
+	template_name = 'config/equipment/equipment_list.html'
 	
 	def get_queryset(self):		
 		return Equipo.objects.filter(empresa=self.request.user.cliente.empresa.id)
 
 
 
-class EquipementUpdateClass(LoginRequiredMixin, UpdateView):
+class EquipmentUpdateClass(LoginRequiredMixin, UpdateView):
 	login_url = 'account:login'
 	model = Equipo
 	form_class = EquipoForm
-	template_name = 'config/equipement/equipement_edit.html'
+	template_name = 'config/equipment/equipment_edit.html'
 	success_url = reverse_lazy('config:equipment_list')
 	success_message = 'equipo actualizado de forma exitosa'
 
@@ -74,10 +74,10 @@ class EquipementUpdateClass(LoginRequiredMixin, UpdateView):
 		messages.success(self.request,self.success_message)
 		return HttpResponseRedirect( self.get_success_url() )
 
-class EquipementDelete(LoginRequiredMixin,DeleteView):
+class EquipmentDelete(LoginRequiredMixin,DeleteView):
 	login_url = 'account:login'
 	model = Equipo	
-	template_name = 'config/equipement/equipement_delete.html'
+	template_name = 'config/equipment/equipment_delete.html'
 	success_url = reverse_lazy('config:equipment_list')
 	
 
@@ -94,6 +94,12 @@ class GeneratePdf(LoginRequiredMixin, ListView):
              'date_time':timezone.now(),
              'object_list':Equipo.objects.filter(empresa=self.request.user.cliente.empresa.id),
          }
-         pdf = render_to_pdf('config/equipement/equipement_list_pdf.html', data)
+         pdf = render_to_pdf('config/equipment/equipment_list_pdf.html', data)
          return HttpResponse(pdf, content_type='application/pdf')
 
+
+# +++++++++++++++++++ material +++++++++++++++++++++++++++++++++++++++++++++
+
+
+def material_index(request):
+	return render(request, 'config/material/material_index.html', {})

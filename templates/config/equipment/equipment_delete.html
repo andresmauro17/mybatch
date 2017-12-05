@@ -1,4 +1,4 @@
-{% extends 'config/equipement/equipement_index.html'%}
+{% extends 'config/equipment/equipment_index.html'%}
 {% load staticfiles %}
 
 {% block container_fluid %}
@@ -13,7 +13,7 @@
                     <h3>Seguro que Desea eliminar el equipo:</h3>
                     <h4><b>{{object.codigo}} {{object.descripcion}}</b>, del registro</h4>
                     <button class="btn btn-danger">eliminar</button>
-                    <a class="btn btn-default" href="{% url 'config:equipement_edit' object.id %}">cancelar</a>                     
+                    <a class="btn btn-default" href="{% url 'config:equipment_edit' object.id %}">cancelar</a>                     
                 </form>
             </div>
                  
