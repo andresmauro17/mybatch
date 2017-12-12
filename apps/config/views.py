@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
+from django.views.generic import DetailView
 from django.views.generic import DeleteView
 from django.views.generic import View
 
@@ -73,6 +74,12 @@ class EquipmentUpdateClass(LoginRequiredMixin, UpdateView):
 		self.object.save()
 		messages.success(self.request,self.success_message)
 		return HttpResponseRedirect( self.get_success_url() )
+
+class EquipmentDetailClass(LoginRequiredMixin, DetailView):
+	login_url = 'account:login'
+	model = Equipo	
+	template_name = 'config/equipment/equipment_detail.html'
+	
 
 class EquipmentDelete(LoginRequiredMixin,DeleteView):
 	login_url = 'account:login'

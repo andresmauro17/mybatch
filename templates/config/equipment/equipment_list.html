@@ -5,13 +5,7 @@
 
 <style>
 
-    .row-icon {
-      visibility: hidden;
-    }
-    tr:hover .row-icon{
-      visibility: visible;
-    }
-
+   
 
 #myImg {
     border-radius: 5px;
@@ -118,7 +112,7 @@
                 <h4 id="messagetag" style="display:none;" >{% if messages %}{% for message in messages  %}{{message}}{% endfor %}{% endif %}</h4>
                 
                 <div class="toolbar">                 
-                    <button onclick="location.href='{% url 'config:equipment_create' %}'" class="btn btn-danger btn-just-icon btn-round pull-right">
+                    <button data-toggle="tooltip" title="nuevo" onclick="location.href='{% url 'config:equipment_create' %}'" class="btn btn-danger btn-just-icon btn-round pull-right">
                         <i class="material-icons">add</i>                        
                     </button> 
 
@@ -129,8 +123,7 @@
                 <div class="material-datatables">
                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                         <thead>
-                            <tr>
-                                <td></td>                                
+                            <tr>                                                               
                                 <td><b>Codigo</b></td>
                                 <td><b>Descripcion</b></td>
                                 <td><b>Marca</b></td>
@@ -140,13 +133,12 @@
                                 <td><b>Estado</b></td>
                                 <td><b>foto1</b></td>
                                 <td><b>foto2</b></td>
-                                <td><b>foto3</b></td>
-                                
+                                <td><b>foto3</b></td>                                
+                                <th class="disabled-sorting text-right">Acciones</th>                                                             
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr>
-                                <td></td>                                
+                            <tr>                                                                
                                 <td>Codigo</td>
                                 <td>Descripcion</td>
                                 <td>Marca</td>
@@ -156,29 +148,22 @@
                                 <td>Estado</td>
                                 <td>foto1</td>
                                 <td>foto2</td> 
-                                <td>foto3</td>                      
+                                <td>foto3</td>
+                                <th class="text-right"><b>Acciones</b></th>  
                                 
                             </tr>
                         </tfoot>
                         <tbody>
                             {% if object_list %}
                                 {% for  equipo in object_list%}
-                                    <tr>
-                                        <td> 
-                                            <span class="row-icon">                                   
-                                                <a href="#">
-                                                    <i class="material-icons">create</i>
-                                                </a>
-                                            </span>                        
-                                            
-                                        </td>                               
-                                        <td><a href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.codigo }}</a></td>
-                                        <td><a href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.descripcion }}</a></td>
-                                        <td><a href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.marca }}</a></td>
-                                        <td><a href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.capacidad_maxima_de_operacion}} {{equipo.unidad}}</a></td>                           
+                                    <tr>                                                                       
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.codigo }}</a></td>
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.descripcion }}</a></td>
+                                        <td><a  data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.marca }}</a></td>
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.capacidad_maxima_de_operacion}} {{equipo.unidad}}</a></td>                           
                                         <td>
                                             {% if equipo.ficha_tecnica %}
-                                                <a href="{{ equipo.ficha_tecnica.url }}" target="_blank">
+                                                <a data-toggle="tooltip" title="ver" href="{{ equipo.ficha_tecnica.url }}" target="_blank">
                                                     <span><i class="material-icons">description</i>
                                                     </span>
                                                 </a> 
@@ -187,9 +172,13 @@
                                             {% endif %}
 
                                         </td>
-                                        <td>{{ equipo.fecha_calibracion }}</td>
                                         <td>
-                                            <a href="{% url 'config:equipment_edit' equipo.id%}">
+                                            <a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">
+                                                {{ equipo.fecha_calibracion }}
+                                            </a>
+                                            </td>
+                                        <td>
+                                            <a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">
                                              {% if equipo.estado == "A" %}
                                                 Activo                                                 
                                              {% elif equipo.estado == "I" %}
@@ -203,47 +192,70 @@
                                             </a>
                                         </td>
                                         <td class="icono-imagen"> 
-                                            <a href="#">
+                                            
                                             {% if equipo.foto1 %}
-                                                <span class="image-view">
-                                                    <i class="material-icons">image</i>                                             
-                                                     <img class="imagen" id="myImg" src="{{ equipo.foto1.url }}" width="10" height="10"> 
-                                                </span> 
+                                                <a data-toggle="tooltip" title="ver" href="#"> 
+                                                    <span class="image-view">
+                                                        <i class="material-icons">image</i>                                             
+                                                         <img class="imagen" id="myImg" src="{{ equipo.foto1.url }}" width="10" height="10"> 
+                                                    </span>
+                                                </a>
                                             {% else %}
-                                                <span class="image-view">
-                                                   <i class="material-icons">visibility_off</i>
-                                                </span>
+                                                <a data-toggle="tooltip" title="no existe foto" href="#"> 
+                                                    <span class="image-view">
+                                                       <i class="material-icons">visibility_off</i>
+                                                    </span>
+                                                </a>
                                             {% endif %}               
-                                            </a>                                           
+                                                                                      
                                         </td>
                                          <td class="icono-imagen"> 
-                                            <a href="#">
+                                            
                                             {% if equipo.foto2 %}
-                                                <span class="image-view">
-                                                    <i class="material-icons">image</i>                                             
-                                                     <img class="imagen" id="myImg" src="{{ equipo.foto2.url }}" width="10" height="10"> 
-                                                </span> 
+                                                <a data-toggle="tooltip" title="ver" href="#"> 
+                                                    <span class="image-view">
+                                                        <i class="material-icons">image</i>                                             
+                                                         <img class="imagen" id="myImg" src="{{ equipo.foto2.url }}" width="10" height="10"> 
+                                                    </span> 
+                                                </a>
                                             {% else %}
-                                                <span class="image-view">
-                                                   <i class="material-icons">visibility_off</i>
-                                                </span>
+                                                <a data-toggle="tooltip" title="no existe foto" href="#"> 
+                                                    <span class="image-view">
+                                                       <i class="material-icons">visibility_off</i>
+                                                    </span>
+                                                </a>
                                             {% endif %}               
-                                            </a>                                           
+                                                                                      
                                         </td>
                                         <td class="icono-imagen"> 
-                                            <a href="#">
+                                            
                                             {% if equipo.foto3 %}
+                                               <a data-toggle="tooltip" title="ver" href="#"> 
                                                 <span class="image-view">
                                                     <i class="material-icons">image</i>                                             
                                                      <img class="imagen" id="myImg" src="{{ equipo.foto3.url }}" width="10" height="10"> 
                                                 </span> 
+                                               </a>  
                                             {% else %}
+                                               <a data-toggle="tooltip" title="no existe foto" href="#"> 
                                                 <span class="image-view">
                                                    <i class="material-icons">visibility_off</i>
                                                 </span>
+                                               </a>
                                             {% endif %}               
-                                            </a>                                           
-                                        </td>                                    
+                                                                                     
+                                        </td>                                      
+                                        <td class="text-right">
+                                            <a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">
+                                                    <i class="material-icons">create</i>
+                                            </a>
+                                            
+                                            <a data-toggle="tooltip" title="Ver" href="{% url 'config:equipment_detail' equipo.id%}" class="btn btn-simple btn-warning btn-icon " >
+                                                    <i class="material-icons">dvr</i>
+                                            </a>
+                                                                                       
+                                            <a data-toggle="tooltip" title="eliminar" href="{% url 'config:equipment_delete' equipo.id %}" class="btn btn-simple btn-danger btn-icon "><i class="material-icons">close</i></a>
+                                        </td>                                   
                                     </tr>
                                 {% endfor %}                                
                             {% else %}
@@ -317,10 +329,28 @@ span.onclick = function() {
                 [10, 25, 50, "todos"]
             ],
             responsive: true,
+            //language: {
+              //  search: "_INPUT_",
+               // searchPlaceholder: "Buscar registro",
+            //}
+
             language: {
                 search: "_INPUT_",
                 searchPlaceholder: "Buscar registro",
+                lengthMenu: "mostrar _MENU_ registros por pagina",
+                zeroRecords: "Nothing found - sorry",
+                info: "Pagina _PAGE_ de _PAGES_",
+                infoEmpty: "No records available",
+                infoFiltered: "(filtered from _MAX_ total records)",
+                paginate: {
+                    first:      "Primero",
+                    previous:   "Anterior",
+                    next:       "Siguiente",
+                    last:       "Ultimo"
+                },            
             }
+
+
 
         });
 
