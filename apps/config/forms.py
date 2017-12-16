@@ -23,17 +23,17 @@ class EquipoForm(forms.ModelForm):
 		]
 		
 		labels = {
-			'codigo':'Codigo del equipo *', 
-			'descripcion':'Descripcion del equipo *', 
+			'codigo':'Codigo del Equipo *', 
+			'descripcion':'Descripcion del Equipo *', 
 			'marca':'Marca *', 
-			'capacidad_maxima_de_operacion':'Capacidad maxima de operacion *', 
-			'unidad':'unidad *',			
-			'ficha_tecnica':'ficha tecnica *', 
-			'fecha_calibracion':'Fecha de calibracion', 
-			'estado':'estado *', 
-			'foto1':'foto1', 
-			'foto2':'foto2', 
-			'foto3':'foto3', 
+			'capacidad_maxima_de_operacion':'Capacidad Maxima de Operacion *', 
+			'unidad':'Unidad de Medida *',			
+			'ficha_tecnica':'Ficha Tecnica *', 
+			'fecha_calibracion':'Fecha de Calibracion', 
+			'estado':'Estado *', 
+			'foto1':'Foto1', 
+			'foto2':'Foto2', 
+			'foto3':'Foto3', 
 		}
 
 		widgets = {

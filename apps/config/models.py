@@ -18,19 +18,19 @@ class Equipo(models.Model):
 	    ('L','Litros'),
 	    ('KG','Kilogramos'),
 	    ('G','Gramos'),
-	    ('LB','Libras'),    
+	    ('LB','Libras'),
 	)
 	unidad = models.CharField(
 	    max_length=5,
-	    choices=UNIDAD_CHOICES,	    
+	    choices=UNIDAD_CHOICES,
 	)
-	
+
 	ficha_tecnica = models.FileField(upload_to='pdf/config/equipo', blank=True)
 	fecha_calibracion = models.DateField(blank=True, null=True)
 	ESTADO_CHOICES = (
 	    ('M', 'En mantenimiento'),
 	    ('A','Activo'),
-	    ('I','Inactivo'),	    
+	    ('I','Inactivo'),
 	)
 	estado = models.CharField(
 	    max_length=1,
@@ -72,32 +72,47 @@ class Material(models.Model):
 	    ('L','Litros'),
 	    ('KG','Kilogramos'),
 	    ('G','Gramos'),
-	    ('LB','Libras'),    
+	    ('LB','Libras'),
 	)
 	unidad_UMB = models.CharField(
 	    max_length=5,
-	    choices=UNIDAD_CHOICES,	    
+	    choices=UNIDAD_CHOICES,
 	)
 	ficha_tecnica = models.FileField(upload_to='pdf/config/material/ficha_tecnica', blank=True)
-	concentracion = models.CharField(max_length=50, blank=True, null=True) 
-	N_de_lote_fabricante = models.CharField(max_length=50, blank=True, null=True) 
+	concentracion = models.CharField(max_length=50, blank=True, null=True)
+	N_de_lote_fabricante = models.CharField(max_length=50, blank=True, null=True)
 	fecha_de_vencimiento = models.DateField(blank=True, null=True)
 	ESTADO_CHOICES = (
 	    ('aprobado', 'Aprobado'),
 	    ('cuarentena','Cuarentena'),
-	    ('rechazado','Rechazado'),	    
+	    ('rechazado','Rechazado'),
 	)
 	estado = models.CharField(
 	    max_length=30,
 	    choices=ESTADO_CHOICES,
 	    blank=True,
 	    null=True
-	)	
+	)
 	certificado_calidad = models.FileField(upload_to='pdf/config/material/certificado_calidad', blank=True, null=True)
 	costo_UMB = models.CharField(max_length=150)
 
 	def __str__(self):
 		return self.codigo
+
+
+# codigo
+# descripcion
+# proveedor
+# fabricante
+# unidad_UMB
+# ficha_tecnica
+# concentracion
+# N_de_lote_fabricante
+# fecha_de_vencimiento
+# estado
+# certificado_calidad
+# costo_UMB
+
 
 class Producto(models.Model):
 	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------

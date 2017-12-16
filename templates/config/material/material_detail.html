@@ -1,0 +1,120 @@
+{% extends 'config/material/material_index.html'%}
+{% load staticfiles %}
+
+{% block container_fluid %}
+
+<div class="row">
+
+     <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Detalle del Material:
+                        <small class="category">{{object.codigo}}</small>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <ul class="nav nav-pills nav-pills-icons nav-pills-info nav-stacked" role="tablist">
+                                <!--
+                    color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                -->
+                                <li class="active">
+                                    <a href="#dashboard-2" role="tab" data-toggle="tab">
+                                        <i class="material-icons">view_headline</i> Detalle
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="dashboard-2">
+
+                                    <h2>{{object.descripcion}}</h2>
+                                    <p><b>Codigo:</b> {{object.codigo}} </p>
+
+                                    <p><b>Proveedor:</b>
+                                        {% for proveedor in material.proveedor.all  %}
+                                            {{proveedor.nombre_proveedor}} |
+                                        {% endfor %}
+                                    </p>
+
+                                    <p><b>Fabricante:</b>
+                                        {% for fabricante in material.fabricante.all  %}
+                                            {{fabricante.nombre_fabricante}} |
+                                        {% endfor %}
+                                    </p>
+
+                                    <p><b>Unidad de Medida Basica UMB:</b> {{ material.get_unidad_UMB_display}}</p>
+                                    <p>
+                                        <b>Ficha tecnica:</b>
+                                        {% if material.ficha_tecnica %}
+                                                <a data-toggle="tooltip" title="ver" href="{{ material.ficha_tecnica.url }}" target="_blank">
+                                                    <span><i class="material-icons">description</i>
+                                                    </span>
+                                                </a>
+                                            {% else %}
+                                                <span><i class="material-icons">clear</i></span>
+                                            {% endif %}
+                                    </p>
+
+                                    <p><b>Concentracion:</b> {{object.concentracion}} </p>
+
+                                    <p><b>Numero de Lote de Fabricante:</b> {{object.N_de_lote_fabricante }} </p>
+
+                                    <p><b>Fecha de Vencimiento:</b> {{ object.fecha_de_vencimiento }} </p>
+
+                                    <p>
+                                        <b>Estado:</b>
+                                        {{ object.get_estado_display}}
+                                    </p>
+
+                                    <p>
+                                        <b>Certificado de Calidad:</b>
+                                        {% if object.certificado_calidad %}
+                                                <a data-toggle="tooltip" title="ver" href="{{ material.certificado_calidad.url }}" target="_blank">
+                                                    <span><i class="material-icons">description</i>
+                                                    </span>
+                                                </a>
+                                            {% else %}
+                                                <span><i class="material-icons">clear</i></span>
+                                            {% endif %}
+                                    </p>
+
+                                    <p><b>Costo de la unidad de medida basica UMb:</b> {{ object.costo_UMB }} </p>
+
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+
+                    <a class="btn btn-primary btn-round pull-right" href="{% url 'config:material_list' %}"> <i class="material-icons">restore</i> Regresar</a>
+
+                </div>
+
+
+            </div>
+        </div>
+</div>
+
+{% endblock container_fluid %}
+
+
+{% block aditional_scripts %}
+
+
+
+
+{% endblock aditional_scripts %}
+
+
+
+
