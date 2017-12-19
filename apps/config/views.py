@@ -121,12 +121,13 @@ class MaterialCreateClass(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('config:material_list')
     success_message = 'material registrado de forma exitosa'
 
-    # def form_valid(self, form):        
-    #     self.object = form.save(commit=False)
-    #     self.object.empresa = Empresa.objects.get(id=self.request.user.cliente.empresa.id)  # use your own profile here
-    #     self.object.save()
-    #     messages.success(self.request,self.success_message)
-    #     return HttpResponseRedirect( self.get_success_url() )
+    def form_valid(self, form):          
+        self.object = form.save(commit=False)          
+        self.object.empresa = Empresa.objects.get(id=self.request.user.cliente.empresa.id)  # use your own profile here
+        self.object.save()
+        form.save_m2m()#this line is adde because the many 2 many filed is not saved
+        messages.success(self.request,self.success_message)
+        return HttpResponseRedirect( self.get_success_url() )
 
 class MaterialListClass(LoginRequiredMixin, ListView):
     login_url = 'account:login'
@@ -161,12 +162,10 @@ class MaterialDetailClass(LoginRequiredMixin, DetailView):
     template_name = 'config/material/material_detail.html'
 
 class MaterialDelete(LoginRequiredMixin,DeleteView):
-    pass
-# class MaterialDelete(LoginRequiredMixin,DeleteView):
-#     login_url = 'account:login'
-#     model = Equipo
-#     template_name = 'config/material/material_delete.html'
-#     success_url = reverse_lazy('config:material_list')
+    login_url = 'account:login'
+    model = Material
+    template_name = 'config/material/material_delete.html'
+    success_url = reverse_lazy('config:material_list')
 
 class MaterialGeneratePdf(LoginRequiredMixin, ListView):
     pass

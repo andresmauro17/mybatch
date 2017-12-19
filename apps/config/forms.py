@@ -71,10 +71,25 @@ class MaterialForm(forms.ModelForm):
 			'costo_UMB',
 		]
 
+		labels = {
+			'codigo' : 'Codigo del Material *',
+			'descripcion' : 'Descripcion del Material *',
+			'proveedor' : 'Proveedor del Material *',
+			'fabricante' : 'Fabricante del Material *',
+			'unidad_UMB' : 'Unidad de Medida Basica UMB *',
+			'ficha_tecnica' : 'Ficha Tecnica del Material',
+			'concentracion' : 'Concentracion del Material',
+			'N_de_lote_fabricante' : 'Numero de Lote del Fabricante',
+			'fecha_de_vencimiento' : 'Fecha de Vencimiento',
+			'estado' : 'Estado',
+			'certificado_calidad' : 'Certificado de Calidad',
+			'costo_UMB' : 'Costo de la Unidad de Medida Basica *',
+		}
+
 		widgets = {
 			'codigo':forms.TextInput(attrs={'class':'form-control','type':'text','required':'true'}),
 			'descripcion':forms.TextInput(attrs={'class':'form-control','type':'text','required':'true'}),
-			# 'proveedor',
+			# 'proveedor'
 			# 'fabricante',
 			'unidad_UMB':forms.Select(attrs={'class':'selectpicker','data-style':'btn btn-info btn-sm btn-round', 'required':'true'}),
 			'ficha_tecnica':forms.FileInput(attrs={}),

@@ -14,23 +14,109 @@
                         <h4 class="card-title"><b>AÑADIR MATERIAL</b></h4>
                     </div>                    
                 </div>
-                <div class="card-content">
-                    {{form.as_p}}
+                <div class="card-content">                  
 
-                    {% comment %} <div class="form-group label-floating">
+                    <div class="form-group label-floating">
                         <label class="control-label" for="{{form.codigo.name}}">{{form.codigo.label}}</label>
                         {{form.codigo}}                        
-                    </div> {% endcomment %}
-                
+                    </div>
+
+                    <div class="form-group label-floating">
+						<label class="control-label" for="{{form.descripcion.name}}">{{form.descripcion.label}}</label>
+						{{form.descripcion}}                        
+                    </div>
+                     
+                    <div class="row">
+                            <label class="col-sm-2 label-on-left">{{form.proveedor.label}}</label> 
+                            <div class="col-sm-4">                                                          
+                                {{form.proveedor}}
+                                <a  class="btn btn-warning btn-round btn-fab btn-fab-mini" href="#">
+                                    <i class="material-icons">add</i>
+                                </a>
+                                <p style="color: #999;" class="small">Mantenga presionado "Control" o "Command" en un Mac, para seleccionar más de una opción.</p>
+                            </div>
+                            <label class="col-sm-2 label-on-left">{{form.fabricante.label}}</label>
+                            <div class="col-sm-4">                                                          
+                                {{form.fabricante}}
+                                <a  class="btn btn-warning btn-round btn-fab btn-fab-mini" href="#">
+                                    <i class="material-icons">add</i>
+                                </a>
+                                <p style="color: #999;" class="small">Mantenga presionado "Control" o "Command" en un Mac, para seleccionar más de una opción.</p>
+                            </div>                            
+                    </div> 
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">               
+                                <legend>{{form.unidad_UMB.label}}</legend> 	
+                                {{form.unidad_UMB}} 								
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">                        
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">        
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <legend>{{form.ficha_tecnica.label}}</legend>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                        {{form.ficha_tecnica}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="{{form.concentracion.name}}">{{form.concentracion.label}}</label>
+                        {{form.concentracion}}                        
+                    </div>
+
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="{{form.N_de_lote_fabricante.name}}">{{form.N_de_lote_fabricante.label}}</label>
+                        {{form.N_de_lote_fabricante}}                        
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" {{form.fecha_de_vencimiento.name}}>{{form.fecha_de_vencimiento.label}}</label>
+                        {{form.fecha_de_vencimiento}}                     
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">                
+                                <legend>{{form.estado.label}}</legend>  
+                                {{form.estado}}                                     
+                        </div>                        
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">                        
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">        
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <legend>{{form.certificado_calidad.label}}</legend>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                        {{form.certificado_calidad}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="{{form.N_de_lote_fabricante.name}}">{{form.costo_UMB.label}}</label>
+                        {{form.costo_UMB}}                        
+                    </div>
+                    
                 </div>
-                
-                
-
-
-
-
-				
-
 				<div class="card-footer text-center">
 	                <button type="submit" class="btn btn-info btn-fill btn-lg">Guardar</button>
 	            </div>
@@ -59,11 +145,70 @@
         $.extend($.validator.messages, {
         required: "este campo es requerido",    
         });
-    }   
-    
+    }       
     setFormValidation('#form_equipo');
-    
-    
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        fecha.initFormExtendedDatetimepickers()
+    });
+
+    fecha = {
+
+       initFormExtendedDatetimepickers: function(){
+        $('.datetimepicker').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+                }
+             });
+
+             $('.datepicker').datetimepicker({
+                format: 'DD/MM/YYYY',
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+                }
+             });
+
+             $('.timepicker').datetimepicker({
+    //          format: 'H:mm',    // use this format if you want the 24hours timepicker
+                format: 'h:mm A',    //use this format if you want the 12hours timpiecker with AM/PM toggle
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+
+                }
+             });
+        }
+        
+    }
+
 </script>
 
 {% endblock aditional_scripts %}
