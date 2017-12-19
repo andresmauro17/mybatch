@@ -70,25 +70,21 @@
 
                                         <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:material_edit' material.id%}">{{ material.descripcion }}</a></td>
 
-                                        <td>
-                                            {% if material.material.proveedor %}
+                                        <td>    
+                                            {% for proveedor in material.proveedor.all  %}
                                                 <a href="{% url 'config:material_edit' material.id%}">
-                                                    {% for proveedor in material.proveedor.all  %}
-                                                        {{proveedor.nombre_proveedor}}
-                                                    {% endfor %}
+                                                    {{proveedor.nombre_proveedor}}
                                                 </a>
-                                            {% endif %}
+                                            {% endfor %} 
                                         </td>
 
 
-                                        <td>
-                                            {% if material.material.fabricante %}
+                                        <td>       
+                                            {% for fabricante in material.fabricante.all  %}
                                                 <a href="{% url 'config:material_edit' material.id%}">
-                                                    {% for fabricante in material.fabricante.all  %}
-                                                        {{ fabricante.nombre_fabricante}}
-                                                    {% endfor %}
+                                                    {{fabricante.nombre_fabricante}} |
                                                 </a>
-                                            {% endif %}
+                                            {% endfor %}
                                         </td>
 
                                         <td><a href="{% url 'config:material_edit' material.id%}">

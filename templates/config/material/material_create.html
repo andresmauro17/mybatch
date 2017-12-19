@@ -1,172 +1,71 @@
 {% extends 'config/material/material_index.html'%}
 {% load staticfiles %}
 
-
-
 {% block container_fluid %}
 
 <div class="row">
-
 	<div class="col-md-12">
 		<div class="card">
 			<form id="form_equipo" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 				{% csrf_token %}
 
+                <div class="card-header card-text" data-background-color="blue">
+                    <div class="card-header">
+                        <h4 class="card-title"><b>AÑADIR MATERIAL</b></h4>
+                    </div>                    
+                </div>
+                <div class="card-content">
+                    {{form.as_p}}
+
+                    {% comment %} <div class="form-group label-floating">
+                        <label class="control-label" for="{{form.codigo.name}}">{{form.codigo.label}}</label>
+                        {{form.codigo}}                        
+                    </div> {% endcomment %}
+                
+                </div>
+                
+                
+
+
+
+
 				
 
-                <div class="card-header card-text" data-background-color="blue">
-                      <div class="card-header">
-                          <h4 class="card-title">Crear nuevo material</h4>
-                          <p class="category">Ingrese los datos del material</p>
-                      </div>
-                      
-                </div>
-
-				<div class="card-content">
-
-					<div class="form-group label-floating">
-						<label class="control-label" for="{{form.codigo.name}}">{{form.codigo.label}}</label>
-						{{form.codigo}}                        
-					</div>
-
-					<div class="form-group label-floating">
-						<label class="control-label" for="{{form.descripcion.name}}">{{form.descripcion.label}}</label>
-						{{form.descripcion}}                        
-					</div>
-                    
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="{{form.proveedor.name}}">{{form.proveedor.label}}</label>
-                        {{form.proveedor}}                        
-                    </div>
-                    
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="{{form.fabricante.name}}">{{form.fabricante.label}}</label>
-                        {{form.fabricante}}                        
-                    </div>
-
-                    			
-                    
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4">
-                            <legend>{{form.certificado_calidad.label}}</legend>
-                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                
-                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                <div>
-                                    <span class="btn btn-default btn-sm btn-round btn-file">
-                                        <span class="fileinput-new">Seleccione Archivo</span>
-                                        <span class="fileinput-exists">Cambiar</span>
-                                       {{form.certificado_calidad}}
-                                    </span>
-                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                    
-
-
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="{{form.concentracion.name}}">{{form.concentracion.label}}</label>
-                        {{form.concentracion}}                        
-                    </div>
-
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="{{form.N_de_lote_fabricante.name}}">{{form.N_de_lote_fabricante.label}}</label>
-                        {{form.N_de_lote_fabricante}}                        
-                    </div>
-
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="{{form.fecha_de_vencimiento.name}}">{{form.fecha_de_vencimiento.label}}</label>
-                        {{form.fecha_de_vencimiento}}                        
-                    </div>
-
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="{{form.estado.name}}">{{form.estado.label}}</label>
-                        {{form.estado}}                        
-                    </div>
-
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="{{form.certificado_calidad.name}}">{{form.certificado_calidad.label}}</label>
-                        {{form.certificado_calidad}}                        
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4">
-                            <legend>{{form.ficha_tecnica.label}}</legend>
-                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                
-                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                <div>
-                                    <span class="btn btn-default btn-sm btn-round btn-file">
-                                        <span class="fileinput-new">Seleccione Archivo</span>
-                                        <span class="fileinput-exists">Cambiar</span>
-                                       {{form.ficha_tecnica}}
-                                    </span>
-                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-
-
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="{{form.costo_UMB.name}}">{{form.costo_UMB.label}}</label>
-                        {{form.costo_UMB}}                        
-                    </div>              
-                    
-                    
-                    
-									
-					
-
-						
-				</div>
-			
 				<div class="card-footer text-center">
 	                <button type="submit" class="btn btn-info btn-fill btn-lg">Guardar</button>
 	            </div>
-
 			</form>
-
-            
-						
-		</div>		
+		</div>
 	</div>
+</div>
 
-</div>         
 
-   
-    
 
-{% endblock container_fluid %} 
-	
+
+{% endblock container_fluid %}
 
 {% block aditional_scripts %}
 
-
 <script type="text/javascript">
-
-function setFormValidation(id){
-    $(id).validate({        
-        errorPlacement: function(error, element) {
-            $(element).parent('div').addClass('has-error');
-         }
-    });
-}
-
-setFormValidation('#form_equipo');
-
+    function setFormValidation(id){
+        $(id).validate({        
+            errorPlacement: function(error, element) {          
+                $(element).parent('div').addClass('has-error');           
+                $(element).parent().siblings('legend').css({"color": "red"});
+                $(error).css({"color": "red"});
+                error.appendTo( element.parent() );
+            },
+        });
+        $.extend($.validator.messages, {
+        required: "este campo es requerido",    
+        });
+    }   
+    
+    setFormValidation('#form_equipo');
+    
+    
 </script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        
-        demo.initFormExtendedDatetimepickers();
-    });
 
-
-</script>
-	
 {% endblock aditional_scripts %}
 
-	
+

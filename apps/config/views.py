@@ -28,6 +28,7 @@ from apps.account.models import Empresa
 from mybatch.utils import render_to_pdf
 
 from .forms import EquipoForm
+from .forms import MaterialForm
 from django.utils import timezone
 
 
@@ -111,22 +112,21 @@ class GeneratePdf(LoginRequiredMixin, ListView):
 def Material_index(request):
 	return render(request, 'config/material/material_index.html', {})
 
-class MaterialCreateClass(LoginRequiredMixin, CreateView):
-    pass
-# class MaterialCreateClass(LoginRequiredMixin, CreateView):
-#     login_url = 'account:login'
-#     model = Equipo
-#     template_name = 'config/material/material_create.html'
-#     form_class = EquipoForm
-#     success_url = reverse_lazy('config:material_list')
-#     success_message = 'equipo registrado de forma exitosa'
 
-#     def form_valid(self, form):
-#         self.object = form.save(commit=False)
-#         self.object.empresa = Empresa.objects.get(id=self.request.user.cliente.empresa.id)  # use your own profile here
-#         self.object.save()
-#         messages.success(self.request,self.success_message)
-#         return HttpResponseRedirect( self.get_success_url() )
+class MaterialCreateClass(LoginRequiredMixin, CreateView):
+    login_url = 'account:login'
+    model = Material
+    template_name = 'config/material/material_create.html'
+    form_class = MaterialForm
+    success_url = reverse_lazy('config:material_list')
+    success_message = 'material registrado de forma exitosa'
+
+    # def form_valid(self, form):        
+    #     self.object = form.save(commit=False)
+    #     self.object.empresa = Empresa.objects.get(id=self.request.user.cliente.empresa.id)  # use your own profile here
+    #     self.object.save()
+    #     messages.success(self.request,self.success_message)
+    #     return HttpResponseRedirect( self.get_success_url() )
 
 class MaterialListClass(LoginRequiredMixin, ListView):
     login_url = 'account:login'
