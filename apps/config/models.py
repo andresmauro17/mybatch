@@ -9,9 +9,9 @@ from apps.account.models import Empresa
 
 class Equipo(models.Model):
 	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
-	codigo = models.CharField(max_length=50, unique=True)
+	codigo = models.CharField(max_length=50)
 	descripcion = models.CharField(max_length=150)
-	marca = models.CharField(max_length=50, default='no aplica')
+	fabricante = models.CharField(max_length=50, default='no aplica')
 	capacidad_maxima_de_operacion= models.IntegerField()
 	UNIDAD_CHOICES = (
 	    ('TON', 'Toneladas'),
@@ -48,6 +48,7 @@ class Equipo(models.Model):
 
 class Proveedor(models.Model):
 	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
+	# codigo
 	nombre_proveedor = models.CharField(max_length=150)
 
 	def __str__(self):
@@ -55,6 +56,7 @@ class Proveedor(models.Model):
 
 class Fabricante(models.Model):
 	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
+	# codigo
 	nombre_fabricante = models.CharField(max_length=150)
 
 	def __str__(self):

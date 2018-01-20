@@ -44,19 +44,20 @@
                                 <p style="color: #999;" class="small">Mantenga presionado "Control" o "Command" en un Mac, para seleccionar más de una opción.</p>
                             </div>                            
                     </div> 
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4">               
-                                <legend>{{form.unidad_UMB.label}}</legend> 	
-                                {{form.unidad_UMB}} 								
-                        </div>
-                    </div>
+
                     <br>
                     <div class="row">
-                        <div class="col-md-4 col-sm-4">                        
+                        <label class="col-sm-2 label-on-top">{{form.unidad_UMB.label}}</label>
+                        <div class="col-lg-2 col-md-2 col-sm-2"> 
+                            {{form.unidad_UMB}} 								
+                        </div>
+                    
+                        <label class="col-sm-2 label-on-top">{{form.ficha_tecnica.label}}</label>
+                        <div class="col-md-2 col-sm-2">                        
                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">        
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                 <div>
-                                    <legend>{{form.ficha_tecnica.label}}</legend>
+                                    
                                     <span class="btn btn-default btn-sm btn-round btn-file">
                                         <span class="fileinput-new">Seleccione Archivo</span>
                                         <span class="fileinput-exists">Cambiar</span>
@@ -84,8 +85,9 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4">                
-                                <legend>{{form.estado.label}}</legend>  
+                        <label class="col-sm-2 label-on-left">{{form.estado.label}}</label>
+                        <div class="col-lg-2 col-md-2 col-sm-2">         
+                                
                                 {{form.estado}}                                     
                         </div>                        
                     </div>

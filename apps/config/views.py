@@ -90,14 +90,11 @@ class EquipmentDelete(LoginRequiredMixin,DeleteView):
 
 
 
-class GeneratePdf(LoginRequiredMixin, ListView):
+class EquipmentGeneratePdf(LoginRequiredMixin, ListView):
      login_url = 'account:login'
      model = Equipo
      def get(self, request, *args, **kwargs):
          data = {
-             'amount': 39.99,
-             'customer_name': 'Cooper Mann',
-             'order_id': 1233434,
              'user':self.request.user,
              'date_time':timezone.now(),
              'object_list':Equipo.objects.filter(empresa=self.request.user.cliente.empresa.id),
@@ -167,20 +164,16 @@ class MaterialDelete(LoginRequiredMixin,DeleteView):
     template_name = 'config/material/material_delete.html'
     success_url = reverse_lazy('config:material_list')
 
+
 class MaterialGeneratePdf(LoginRequiredMixin, ListView):
-    pass
-# class MaterialGeneratePdf(LoginRequiredMixin, ListView):
-#      login_url = 'account:login'
-#      model = Equipo
-#      def get(self, request, *args, **kwargs):
-#          data = {
-#              'amount': 39.99,
-#              'customer_name': 'Cooper Mann',
-#              'order_id': 1233434,
-#              'user':self.request.user,
-#              'date_time':timezone.now(),
-#              'object_list':Equipo.objects.filter(empresa=self.request.user.cliente.empresa.id),
-#          }
-#          pdf = render_to_pdf('config/material/equipment_list_pdf.html', data)
-#          return HttpResponse(pdf, content_type='application/pdf')
+     login_url = 'account:login'
+     model = Material
+     def get(self, request, *args, **kwargs):
+         data = {
+             'user':self.request.user,
+             'date_time':timezone.now(),
+             'object_list':Material.objects.filter(empresa=self.request.user.cliente.empresa.id),
+         }
+         pdf = render_to_pdf('config/material/material_list_pdf.html', data)
+         return HttpResponse(pdf, content_type='application/pdf')
 
