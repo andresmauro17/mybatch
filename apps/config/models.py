@@ -11,7 +11,7 @@ class Equipo(models.Model):
 	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
 	codigo = models.CharField(max_length=50)
 	descripcion = models.CharField(max_length=150)
-	fabricante = models.CharField(max_length=50, default='no aplica')
+	marca = models.CharField(max_length=50, default='no aplica')
 	capacidad_maxima_de_operacion= models.IntegerField()
 	UNIDAD_CHOICES = (
 	    ('TON', 'Toneladas'),
