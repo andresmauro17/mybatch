@@ -8,11 +8,12 @@ from apps.account.models import Empresa
 # Create your models here.
 
 class Equipo(models.Model):
-	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE, default=1)##---- modificar el default -------
+	empresa = models.ForeignKey(Empresa, on_delete = models.CASCADE)
 	codigo = models.CharField(max_length=50)
 	descripcion = models.CharField(max_length=150)
-	marca = models.CharField(max_length=50, default='no aplica')
-	capacidad_maxima_de_operacion= models.IntegerField()
+	fabricante = models.CharField(max_length=50, default='no aplica')
+	capacidad_minima_de_operacion= models.DecimalField(max_digits=5, decimal_places=2)
+	capacidad_maxima_de_operacion= models.DecimalField(max_digits=5, decimal_places=2)
 	UNIDAD_CHOICES = (
 	    ('TON', 'Toneladas'),
 	    ('L','Litros'),

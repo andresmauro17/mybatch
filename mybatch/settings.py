@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'mybatch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mybatch',
+        'NAME': 'smartbatch',
         'USER': 'root',
         'PASSWORD': 'thebest1',
         'HOST': 'localhost',
