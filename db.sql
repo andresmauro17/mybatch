@@ -1,0 +1,4 @@
+
+CREATE DATABASE smartbatch CHARACTER SET UTF8;
+GRANT ALL PRIVILEGES ON smartbatch.* TO root@localhost;
+FLUSH PRIVILEGES;
