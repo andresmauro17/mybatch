@@ -1,0 +1,139 @@
+
+{% extends 'base_home.html'%}
+{% load staticfiles %}
+
+{% block wrapper %} 
+
+
+<div class="full-page register-page" filter-color="black" data-image="{% static 'img/register.jpeg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="card card-signup">
+                    <h2 class="card-title text-center">¡Crea tu cuenta gratis!</h2>
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-1">
+                            <div class="card-content">
+                                <div class="info info-horizontal">
+                                    <div class="icon icon-rose">
+                                        <i class="material-icons">timeline</i>
+                                    </div>
+                                    <div class="description">
+                                        <h4 class="info-title">Marketing</h4>
+                                        <p class="description">
+                                            We've created the marketing campaign of the website. It was a very interesting collaboration.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="info info-horizontal">
+                                    <div class="icon icon-primary">
+                                        <i class="material-icons">code</i>
+                                    </div>
+                                    <div class="description">
+                                        <h4 class="info-title">Fully Coded in HTML5</h4>
+                                        <p class="description">
+                                            We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="info info-horizontal">
+                                    <div class="icon icon-info">
+                                        <i class="material-icons">group</i>
+                                    </div>
+                                    <div class="description">
+                                        <h4 class="info-title">Built Audience</h4>
+                                        <p class="description">
+                                            There is also a Fully Customizable CMS Admin Dashboard for this product.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="social text-center">                                
+                                .
+                                <h4> <a href="#something">Prueba tu cuenta gratis durante 30 dias </a></h4>
+                            </div>
+                            <form class="form" method="" action="">
+                                <div class="card-content">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">face</i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Usuario">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">email</i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Correo electronico">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">lock_outline</i>
+                                        </span>
+                                        <input type="password" placeholder="Contraseña" class="form-control" />
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">store</i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Nombre de tu negocio">
+                                    </div>
+
+                                    <!-- If you want to add a checkbox to this form, uncomment this code -->
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="optionsCheckboxes" checked> Acepto los
+                                            <a href="#something">Terminos y condiciones</a>.
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="footer text-center">
+                                    <a href="#pablo" class="btn btn-primary btn-round">Crear Cuenta</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <nav class="pull-left">
+            <ul>
+                <li>
+                    <a href="#">
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cieltechno.com">
+                        Compañia
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Portfolio
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Blog
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <p class="copyright pull-right">
+            &copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script>
+            <a href="http://www.cieltechno.com">CielTechno®</a>, Tecnologia farmaceutica a su alcance
+        </p>
+    </div>
+</footer>
+</div>
+
+{% endblock wrapper %}

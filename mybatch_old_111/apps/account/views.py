@@ -24,6 +24,9 @@ class LoginClass(View):
 	form = LoginUserForm()
 	message = None 
 	template = 'account/login.html'
+	def get(self, request, *args, **kwargs):
+		form = self.form_class(initial=self.initial)
+		return render(request, self.template_name, {'form': form})
 
 	def get(self, request, *args, **kwargs):
 		if request.user.is_authenticated():			

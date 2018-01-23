@@ -1,0 +1,246 @@
+{% extends 'config/equipment/equipment_index.html'%}
+{% load staticfiles %}
+
+{% block container_fluid %}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<form id="form_equipo" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}				
+
+                <div class="card-header card-text" data-background-color="blue">
+                      <div class="card-header">
+                          <h4 class="card-title"><b>AÑADIR EQUIPO</b></h4>
+                      </div>
+                      
+                </div>
+
+				<div class="card-content">
+
+					<div class="form-group label-floating">
+						<label class="control-label" for="{{form.codigo.name}}">{{form.codigo.label}}</label>
+						{{form.codigo}}                        
+					</div>
+
+					<div class="form-group label-floating">
+						<label class="control-label" for="{{form.descripcion.name}}">{{form.descripcion.label}}</label>
+						{{form.descripcion}}                        
+					</div>
+					<div class="form-group label-floating">
+						<label class="control-label" for="{{form.marca.name}}">{{form.marca.label}}</label>
+						{{form.marca}}                        
+					</div>
+					
+					
+					<div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="{{form.capacidad_maxima_de_operacion.name}}">{{form.capacidad_maxima_de_operacion.label}}</label>
+                                {{form.capacidad_maxima_de_operacion}}          
+                            </div>
+                        </div>                        
+						
+                        <div class="col-lg-4 col-md-4 col-sm-4">               
+                            <legend>{{form.unidad.label}}</legend> 	
+							{{form.unidad}} 								
+						</div>
+					</div>
+					
+					<br>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">                
+                                <legend>{{form.estado.label}}</legend>  
+                                {{form.estado}}                                     
+                        </div>                        
+                    </div>
+
+                    <br>
+					
+					<div class="row">
+						<div class="col-md-4 col-sm-4">                        
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">        
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <legend>{{form.ficha_tecnica.label}}</legend>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                       {{form.ficha_tecnica}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+					<div class="form-group">
+						<label class="control-label" {{form.fecha_calibracion.name}}>{{form.fecha_calibracion.label}}</label>
+						{{form.fecha_calibracion}}                     
+					</div>
+
+					<br>
+
+					<div class="row">
+						<div class="col-md-4 col-sm-4">
+                            <legend>Foto 1</legend>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="{% static 'img/image_placeholder.jpg' %}" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                       {{form.foto1}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <legend>Foto 2</legend>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="{% static 'img/image_placeholder.jpg' %}" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                       {{form.foto2}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <legend>Foto 3</legend>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="{% static 'img/image_placeholder.jpg' %}" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-default btn-sm btn-round btn-file">
+                                        <span class="fileinput-new">Seleccione Archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                       {{form.foto3}}
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remover</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>					
+					
+						
+				</div>
+			
+				<div class="card-footer text-center">
+	                <button type="submit" class="btn btn-info btn-fill btn-lg">Guardar</button>
+	            </div>
+
+			</form>
+						
+		</div>		
+	</div>
+
+</div>         
+
+   
+    
+
+{% endblock container_fluid %} 
+	
+
+{% block aditional_scripts %}
+
+<script type="text/javascript">
+
+function setFormValidation(id){
+    $(id).validate({        
+        errorPlacement: function(error, element) {          
+            $(element).parent('div').addClass('has-error');           
+            $(element).parent().siblings('legend').css({"color": "red"});
+            $(error).css({"color": "red"});
+            error.appendTo( element.parent() );
+        },
+    });
+    $.extend($.validator.messages, {
+    required: "este campo es requerido",    
+    });
+}
+
+
+setFormValidation('#form_equipo');
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        fecha.initFormExtendedDatetimepickers()
+    });
+
+    fecha = {
+
+       initFormExtendedDatetimepickers: function(){
+        $('.datetimepicker').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+                }
+             });
+
+             $('.datepicker').datetimepicker({
+                format: 'DD/MM/YYYY',
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+                }
+             });
+
+             $('.timepicker').datetimepicker({
+    //          format: 'H:mm',    // use this format if you want the 24hours timepicker
+                format: 'h:mm A',    //use this format if you want the 12hours timpiecker with AM/PM toggle
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+
+                }
+             });
+        }
+        
+    }
+
+</script>
+	
+{% endblock aditional_scripts %}
+
+	

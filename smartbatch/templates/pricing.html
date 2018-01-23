@@ -1,0 +1,117 @@
+{% extends 'base_home.html'%}
+{% load staticfiles %}
+
+{% block wrapper %}
+	
+	<div class="full-page pricing-page" data-image="{% static 'img/bg-pricing.jpeg' %}">
+	    <div class="content">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-md-6 col-md-offset-3 text-center">
+		                <h2 class="title">Selecione el mejor plan para usted</h2>
+		                <h5 class="description">Usted tiene soporte ilimitado gratuito para cada paquete</h5>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-3">
+		                <div class="card card-pricing card-plain">
+		                    <div class="card-content">
+		                        <h6 class="category">Freelancer</h6>
+		                        <div class="icon">
+		                            <i class="material-icons">weekend</i>
+		                        </div>
+		                        <h3 class="card-title">Gratis</h3>
+		                        <p class="card-description">
+		                            Es ideal para personas independientes.
+		                        </p>
+		                        <a href="#pablo" class="btn btn-white btn-round">Seleccionar Plan</a>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-3">
+		                <div class="card card-pricing card-raised">
+		                    <div class="card-content">
+		                        <h6 class="category">Pequeñas Empresas</h6>
+		                        <div class="icon icon-rose">
+		                            <i class="material-icons">home</i>
+		                        </div>
+		                        <h3 class="card-title">$29</h3>
+		                        <p class="card-description">
+		                            Es ideal si tu empresa tiene entre 2 y 10 Personas.
+		                        </p>
+		                        <a href="#pablo" class="btn btn-rose btn-round">Seleccionar Plan</a>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-3">
+		                <div class="card card-pricing card-plain">
+		                    <div class="card-content">
+		                        <h6 class="category">Empresas Medianas</h6>
+		                        <div class="icon">
+		                            <i class="material-icons">business</i>
+		                        </div>
+		                        <h3 class="card-title">$69</h3>
+		                        <p class="card-description">
+		                            Es ideal si tu empresa tiene entre 11 and 99 Personas.
+		                        </p>
+		                        <a href="#pablo" class="btn btn-white btn-round">Selecconar Plan</a>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-3">
+		                <div class="card card-pricing card-plain">
+		                    <div class="card-content">
+		                        <h6 class="category">Grandes Empresas</h6>
+		                        <div class="icon">
+		                            <i class="material-icons">account_balance</i>
+		                        </div>
+		                        <h3 class="card-title">$159</h3>
+		                        <p class="card-description">
+		                            Es ideal para empresas de mas de 99 personas.
+		                        </p>
+		                        <a href="#pablo" class="btn btn-white btn-round">Seleccionar Plan</a>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+	    <footer class="footer">
+	        <div class="container">
+	            <nav class="pull-left">
+	                <ul>
+	                    <li>
+	                        <a href="/">
+	                            Inicio
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="http://www.cieltechno.com">
+	                            Compañia
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#">
+	                            Portfolio
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#">
+	                            Blog
+	                        </a>
+	                    </li>
+	                </ul>
+	            </nav>
+	            <p class="copyright pull-right">
+	                &copy;
+	                <script>
+	                    document.write(new Date().getFullYear())
+	                </script>
+	                <a href="http://www.cieltechno.com">CielTechno®</a>, Tecnologia farmaceutica a su alcance
+	            </p>
+	        </div>
+	    </footer>
+	</div>
+    
+{% endblock wrapper %}

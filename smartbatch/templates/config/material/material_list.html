@@ -1,0 +1,280 @@
+{% extends 'config/material/material_index.html'%}
+{% load staticfiles %}
+
+
+{% block container_fluid %}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="blue">
+                <i class="material-icons">assignment</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title"><b>LISTADO DE MATERIALES</b></h4>
+
+                <h4 id="messagetag" style="display:none;" >{% if messages %}{% for message in messages  %}{{message}}{% endfor %}{% endif %}</h4>
+
+                <div class="toolbar">
+                    <button data-toggle="tooltip" title="nuevo" onclick="location.href='{% url 'config:material_create' %}'" class="btn btn-danger btn-just-icon btn-round pull-right">
+                        <i class="material-icons">add</i>
+                    </button>
+
+                    <button onclick="location.href='{% url 'config:material_pdf_list' %}'" class="btn btn-primary btn-round pull-right">
+                        <i class="material-icons">picture_as_pdf</i> Generar reporte
+                    </button>
+                </div>
+                <div class="material-datatables">
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                        <thead>
+                            <tr>
+
+                                <td><b>Codigo </b></td>
+                                <td><b>Descripcion </b></td>
+                                <td><b>Proveedor </b></td>
+                                <td><b>Fabricante </b></td>
+                                <td><b>UMB  </b></td>
+                                <td><b>Ficha</b></td>
+                                <td><b>Concentracion </b></td>
+                                <td><b>Lote_fabricante </b></td>
+                                <td><b>Vencimiento </b></td>
+                                <td><b>Estado </b></td>
+                                <td><b>Calidad </b></td>
+                                <td><b>Costo_UMB </b></td>
+                                <th class="disabled-sorting text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td><b>Codigo </b></td>
+                                <td><b>Descripcion </b></td>
+                                <td><b>Proveedor </b></td>
+                                <td><b>Fabricante </b></td>
+                                <td><b>UMB  </b></td>
+                                <td><b>Ficha</b></td>
+                                <td><b>Concentracion </b></td>
+                                <td><b>Lote_fabricante </b></td>
+                                <td><b>Vencimiento </b></td>
+                                <td><b>Estado </b></td>
+                                <td><b>Calidad </b></td>
+                                <td><b>Costo_UMB </b></td>
+                                <th class="disabled-sorting text-right">Acciones</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% if object_list %}
+                                {% for  material in object_list%}
+                                    <tr>
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:material_edit' material.id%}">{{ material.codigo }}</a></td>
+
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:material_edit' material.id%}">{{ material.descripcion }}</a></td>
+
+                                        <td>    
+                                            {% for proveedor in material.proveedor.all  %}
+                                                <a href="{% url 'config:material_edit' material.id%}">
+                                                    {{proveedor.nombre_proveedor}}
+                                                </a>
+                                            {% endfor %} 
+                                        </td>
+
+
+                                        <td>       
+                                            {% for fabricante in material.fabricante.all  %}
+                                                <a href="{% url 'config:material_edit' material.id%}">
+                                                    {{fabricante.nombre_fabricante}} |
+                                                </a>
+                                            {% endfor %}
+                                        </td>
+
+                                        <td><a href="{% url 'config:material_edit' material.id%}">
+                                        {{ material.get_unidad_UMB_display}}</a></td>
+
+
+                                        <td>
+                                            {% if material.ficha_tecnica %}
+                                                <a data-toggle="tooltip" title="ver" href="{{ material.ficha_tecnica.url }}" target="_blank">
+                                                    <span><i class="material-icons">description</i>
+                                                    </span>
+                                                </a>
+                                            {% else %}
+                                                <span><i class="material-icons">clear</i></span>
+                                            {% endif %}
+
+                                        </td>
+
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:material_edit' material.id%}">{{ material.concentracion }}</a></td>
+
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:material_edit' material.id%}">{{ material.N_de_lote_fabricante }}</a></td>
+
+                                        <td>
+                                            <a data-toggle="tooltip" title="Editar" href="#">
+                                                {{ material.fecha_de_vencimiento }}
+                                            </a>
+                                        </td>
+
+                                        <td><a href="{% url 'config:material_edit' material.id%}">
+                                        {{ material.get_estado_display}}</a></td>
+
+                                        <td>
+                                            {% if material.certificado_calidad %}
+                                                <a data-toggle="tooltip" title="ver" href="{{ material.certificado_calidad.url }}" target="_blank">
+                                                    <span><i class="material-icons">description</i>
+                                                    </span>
+                                                </a>
+                                            {% else %}
+                                                <span><i class="material-icons">clear</i></span>
+                                            {% endif %}
+
+                                        </td>
+
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:material_edit' material.id%}">{{ material.costo_UMB }}</a></td>
+
+                                        <td class="text-right">
+                                            <a data-toggle="tooltip" title="Editar" href="{% url 'config:material_edit' material.id%}">
+                                                    <i class="material-icons">create</i>
+                                            </a>
+
+                                            <a data-toggle="tooltip" title="Ver" href="{% url 'config:material_detail' material.id%}" class="btn btn-simple btn-warning btn-icon " >
+                                                    <i class="material-icons">dvr</i>
+                                            </a>
+
+                                            <a data-toggle="tooltip" title="eliminar" href="{% url 'config:material_delete' material.id %}" class="btn btn-simple btn-danger btn-icon "><i class="material-icons">close</i></a>
+
+
+                                        </td>
+
+
+
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <h1>No a creado ningun equipo</h1>
+                            {% endif %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+{% endblock container_fluid %}
+
+
+{% block aditional_scripts %}
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+$( ".imagen").hide();
+$( ".image-view" ).click(function(){
+    var modal = document.getElementById('myModal');
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var modalImg = document.getElementById("img01");
+    console.log($(this).find('img').attr('src'));
+    modal.style.display = "block";
+    modalImg.src = $(this).find('img').attr('src');
+    });
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+</script>
+
+<script>
+    let messagetag = document.getElementById("messagetag").innerHTML;
+    if(messagetag != ""){
+        swal({
+                title: "Genial!",
+                text: messagetag,
+                buttonsStyling: false,
+                confirmButtonClass: "btn btn-success btn-fill",
+                type: "success"
+            });
+    }
+</script>
+
+
+<script>
+
+
+    $(document).ready(function() {
+        $('#datatables').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "todos"]
+            ],
+            responsive: true,
+            //language: {
+              //  search: "_INPUT_",
+               // searchPlaceholder: "Buscar registro",
+            //}
+
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar registro",
+                lengthMenu: "mostrar _MENU_ registros por pagina",
+                zeroRecords: "Nothing found - sorry",
+                info: "Pagina _PAGE_ de _PAGES_",
+                infoEmpty: "No records available",
+                infoFiltered: "(filtered from _MAX_ total records)",
+                paginate: {
+                    first:      "Primero",
+                    previous:   "Anterior",
+                    next:       "Siguiente",
+                    last:       "Ultimo"
+                },
+            }
+
+
+
+        });
+
+
+        var table = $('#datatables').DataTable();
+
+        // Edit record
+        table.on('click', '.edit', function() {
+            $tr = $(this).closest('tr');
+
+            var data = table.row($tr).data();
+            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+        });
+
+        // Delete a record
+        table.on('click', '.remove', function(e) {
+            $tr = $(this).closest('tr');
+            table.row($tr).remove().draw();
+            e.preventDefault();
+        });
+
+        //Like record
+        table.on('click', '.like', function() {
+            alert('You clicked on Like button');
+        });
+
+        $('.card .material-datatables label').addClass('form-group');
+    });
+
+
+</script>
+
+
+
+{% endblock aditional_scripts %}
+
+

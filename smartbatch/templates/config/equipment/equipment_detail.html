@@ -1,0 +1,119 @@
+{% extends 'config/equipment/equipment_index.html'%}
+{% load staticfiles %}
+
+{% block container_fluid %}
+
+<div class="row">
+  
+     <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Detalle del equipo: 
+                        <small class="category">{{object.codigo}}</small>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <ul class="nav nav-pills nav-pills-icons nav-pills-info nav-stacked" role="tablist">
+                                <!--
+                    color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                -->
+                                <li class="active">
+                                    <a href="#dashboard-2" role="tab" data-toggle="tab">
+                                        <i class="material-icons">view_headline</i> Detalle
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#schedule-2" role="tab" data-toggle="tab">
+                                        <i class="material-icons">photo</i> imagenes
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="dashboard-2">
+                                    
+                                    <h2>{{object.descripcion}}</h2>
+                                    <p><b>Codigo:</b> {{object.codigo}} </p>
+                                    <p><b>Marca:</b> {{object.marca}}</p>
+                                    <p><b>Capacidad maxima de operacion:</b> {{ object.capacidad_maxima_de_operacion}} {{object.unidad}}</p>
+                                    <p>
+                                        <b>Ficha tecnica:</b>
+                                        {% if equipo.ficha_tecnica %}
+                                                <a data-toggle="tooltip" title="ver" href="{{ equipo.ficha_tecnica.url }}" target="_blank">
+                                                    <span><i class="material-icons">description</i>
+                                                    </span>
+                                                </a> 
+                                            {% else %}
+                                                <span><i class="material-icons">clear</i></span>                                          
+                                            {% endif %} 
+                                    </p>
+                                    <p><b>Fecha de calibracion:</b> {{ equipo.fecha_calibracion }} </p>
+                                    <p>
+                                        <b>Estado:</b>
+                                        {% if equipo.estado == "A" %}
+                                            Activo                                                 
+                                         {% elif equipo.estado == "I" %}
+                                            Inactivo
+                                         {% elif equipo.estado == "M"  %}
+                                            Mantenimiento
+                                         {% else %}
+                                            ----                                            
+                                         {% endif %}
+                                    </p>
+                                    
+
+
+                                   
+
+
+                                   
+                                </div>
+                                <div class="tab-pane" id="schedule-2">
+                                            
+                                            {% if equipo.foto1 %}                                                 
+                                                <img class="imagen" id="myImg" src="{{ equipo.foto1.url }}" width="10" height="10"> 
+                                                <hr>                                       
+                                            {% endif %} 
+                                            
+                                            {% if equipo.foto2 %}
+                                                <img class="imagen" id="myImg" src="{{ equipo.foto2.url }}" width="10" height="10">
+                                                <hr>                                                   
+                                            {% endif %} 
+                                            
+                                            {% if equipo.foto3 %}
+                                               <img class="imagen" id="myImg" src="{{ equipo.foto3.url }}" width="10" height="10">
+                                               <hr>
+                                            {% endif %} 
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">                   
+
+                    <a class="btn btn-primary btn-round pull-right" href="{% url 'config:equipment_list' %}"> <i class="material-icons">restore</i> Regresar</a> 
+                      
+                </div>
+
+               
+            </div>
+        </div>
+</div>   
+
+{% endblock container_fluid %} 
+    
+
+{% block aditional_scripts %}
+
+
+
+    
+{% endblock aditional_scripts %}
+
+    
+
+    

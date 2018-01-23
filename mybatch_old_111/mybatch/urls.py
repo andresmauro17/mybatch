@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^account/', include('apps.account.urls', namespace="account")),
     url(r'^config/', include('apps.config.urls', namespace="config")),   
     url(r'^$', home, name = "home"),
-    url(r'^dashboard/', dashboard, name = "dashboard"),
+    # url(r'^dashboard/', dashboard, name = "dashboard"),
 ]
 
 if settings.DEBUG:

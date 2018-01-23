@@ -1,0 +1,39 @@
+{% extends 'base_app.html'%}
+{% load staticfiles %}
+
+{% block config%}                        
+    <li class="active"> 
+        <a data-toggle="collapse" href="#configuracion">
+            <i class="material-icons">settings</i>
+            <p>Configuracion
+                <b class="caret"></b>
+            </p>
+        </a>                           
+         <div class="collapse in" id="configuracion">                         
+            <ul class="nav">                                    
+                <li class="active">
+                    <a href="{% url 'config:config_index' %}">Configuracion</a>
+                </li>                          
+                <li>
+                    <a href="{% url 'config:equipment_list' %}">Equipos</a>
+                </li>
+                <li>
+                    <a href="{% url 'config:material_list' %}">material</a>
+                </li>                                                   
+            </ul>
+        </div>                          
+    </li>
+{% endblock config %}
+    
+
+
+
+{% block container_fluid %}
+
+<div class="row">
+
+    <div class="col-md-12">
+          
+    </div>
+</div>
+{% endblock container_fluid %} 

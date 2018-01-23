@@ -1,0 +1,398 @@
+{% extends 'config/equipment/equipment_index.html'%}
+{% load staticfiles %}
+
+{% block aditional-css %}
+
+<style>
+
+
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+</style>
+
+{% endblock aditional-css %}
+
+
+{% block container_fluid %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="blue">
+                <i class="material-icons">assignment</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title"><b>LISTADO DE EQUIPOS</b></h4>
+
+                <h4 id="messagetag" style="display:none;" >{% if messages %}{% for message in messages  %}{{message}}{% endfor %}{% endif %}</h4>
+
+                <div class="toolbar">
+                    <button data-toggle="tooltip" title="nuevo" onclick="location.href='{% url 'config:equipment_create' %}'" class="btn btn-danger btn-just-icon btn-round pull-right">
+                        <i class="material-icons">add</i>
+                    </button>
+
+                    <button onclick="location.href='{% url 'config:equipment_pdf_list' %}'" class="btn btn-primary btn-round pull-right">
+                        <i class="material-icons">picture_as_pdf</i> Generar reporte
+                    </button>
+                </div>
+                <div class="material-datatables">
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                        <thead>
+                            <tr>
+                                <td><b>Codigo</b></td>
+                                <td><b>Descripcion</b></td>
+                                <td><b>Marca</b></td>
+                                <td><b>Capacidad unidad</b></td>
+                                <td><b>ficha</b></td>
+                                <td><b>calibracion</b></td>
+                                <td><b>Estado</b></td>
+
+                                <!-- <td><b>foto1</b></td>
+                                <td><b>foto2</b></td>
+                                <td><b>foto3</b></td>  -->
+
+                                <th class="disabled-sorting text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td><b>Codigo</b></td>
+                                <td><b>Descripcion</b></td>
+                                <td><b>Marca</b></td>
+                                <td><b>Capacidad unidad</b></td>
+                                <td><b>ficha</b></td>
+                                <td><b>calibracion</b></td>
+                                <td><b>Estado</b></td>
+
+                                <!-- <td><b>foto1</b></td>
+                                <td><b>foto2</b></td>
+                                <td><b>foto3</b></td> -->
+
+                                <th class="text-right"><b>Acciones</b></th>
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% if object_list %}
+                                {% for  equipo in object_list%}
+                                    <tr>
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.codigo }}</a></td>
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.descripcion }}</a></td>
+                                        <td><a  data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.marca }}</a></td>
+                                        <td><a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">{{ equipo.capacidad_maxima_de_operacion}} {{equipo.unidad}}</a></td>
+                                        <td>
+                                            {% if equipo.ficha_tecnica %}
+                                                <a data-toggle="tooltip" title="ver" href="{{ equipo.ficha_tecnica.url }}" target="_blank">
+                                                    <span><i class="material-icons">description</i>
+                                                    </span>
+                                                </a>
+                                            {% else %}
+                                                <span><i class="material-icons">clear</i></span>
+                                            {% endif %}
+
+                                        </td>
+                                        <td>
+                                            <a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">
+                                                {{ equipo.fecha_calibracion }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">
+                                             <!-- {% if equipo.estado == "A" %}
+                                                Activo
+                                             {% elif equipo.estado == "I" %}
+                                                Inactivo
+                                             {% elif equipo.estado == "M"  %}
+                                                Mantenimiento
+                                             {% else %}
+                                                ----
+                                             {% endif %} -->
+
+                                             {{equipo.get_estado_display}}
+
+                                            </a>
+                                        </td>
+                                        <!-- <td class="icono-imagen">
+
+                                            {% if equipo.foto1 %}
+                                                <a data-toggle="tooltip" title="ver" href="#">
+                                                    <span class="image-view">
+                                                        <i class="material-icons">image</i>
+                                                         <img class="imagen" id="myImg" src="{{ equipo.foto1.url }}" width="10" height="10">
+                                                    </span>
+                                                </a>
+                                            {% else %}
+                                                <a data-toggle="tooltip" title="no existe foto" href="#">
+                                                    <span class="image-view">
+                                                       <i class="material-icons">visibility_off</i>
+                                                    </span>
+                                                </a>
+                                            {% endif %}
+
+                                        </td>
+                                         <td class="icono-imagen">
+
+                                            {% if equipo.foto2 %}
+                                                <a data-toggle="tooltip" title="ver" href="#">
+                                                    <span class="image-view">
+                                                        <i class="material-icons">image</i>
+                                                         <img class="imagen" id="myImg" src="{{ equipo.foto2.url }}" width="10" height="10">
+                                                    </span>
+                                                </a>
+                                            {% else %}
+                                                <a data-toggle="tooltip" title="no existe foto" href="#">
+                                                    <span class="image-view">
+                                                       <i class="material-icons">visibility_off</i>
+                                                    </span>
+                                                </a>
+                                            {% endif %}
+
+                                        </td>
+                                        <td class="icono-imagen">
+
+                                            {% if equipo.foto3 %}
+                                               <a data-toggle="tooltip" title="ver" href="#">
+                                                <span class="image-view">
+                                                    <i class="material-icons">image</i>
+                                                     <img class="imagen" id="myImg" src="{{ equipo.foto3.url }}" width="10" height="10">
+                                                </span>
+                                               </a>
+                                            {% else %}
+                                               <a data-toggle="tooltip" title="no existe foto" href="#">
+                                                <span class="image-view">
+                                                   <i class="material-icons">visibility_off</i>
+                                                </span>
+                                               </a>
+                                            {% endif %}
+
+                                        </td>
+                                        -->
+                                        <td class="text-right">
+                                            <a data-toggle="tooltip" title="Editar" href="{% url 'config:equipment_edit' equipo.id%}">
+                                                    <i class="material-icons">create</i>
+                                            </a>
+
+                                            <a data-toggle="tooltip" title="Ver" href="{% url 'config:equipment_detail' equipo.id%}" class="btn btn-simple btn-warning btn-icon " >
+                                                    <i class="material-icons">dvr</i>
+                                            </a>
+
+                                            <a data-toggle="tooltip" title="eliminar" href="{% url 'config:equipment_delete' equipo.id %}" class="btn btn-simple btn-danger btn-icon "><i class="material-icons">close</i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <h1>No a creado ningun equipo</h1>
+                            {% endif %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+{% endblock container_fluid %}
+
+
+{% block aditional_scripts %}
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+$( ".imagen").hide();
+$( ".image-view" ).click(function(){
+    var modal = document.getElementById('myModal');
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var modalImg = document.getElementById("img01");
+    console.log($(this).find('img').attr('src'));
+    modal.style.display = "block";
+    modalImg.src = $(this).find('img').attr('src');
+    });
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+</script>
+
+<script>
+    let messagetag = document.getElementById("messagetag").innerHTML;
+    if(messagetag != ""){
+        swal({
+                title: "Genial!",
+                text: messagetag,
+                buttonsStyling: false,
+                confirmButtonClass: "btn btn-success btn-fill",
+                type: "success"
+            });
+    }
+</script>
+
+
+<script>
+
+
+    $(document).ready(function() {
+        $('#datatables').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "todos"]
+            ],
+            responsive: true,
+            //language: {
+              //  search: "_INPUT_",
+               // searchPlaceholder: "Buscar registro",
+            //}
+
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar registro",
+                lengthMenu: "mostrar _MENU_ registros por pagina",
+                zeroRecords: "Nothing found - sorry",
+                info: "Pagina _PAGE_ de _PAGES_",
+                infoEmpty: "No records available",
+                infoFiltered: "(filtered from _MAX_ total records)",
+                paginate: {
+                    first:      "Primero",
+                    previous:   "Anterior",
+                    next:       "Siguiente",
+                    last:       "Ultimo"
+                },
+            }
+
+
+
+        });
+
+
+        var table = $('#datatables').DataTable();
+
+        // Edit record
+        table.on('click', '.edit', function() {
+            $tr = $(this).closest('tr');
+
+            var data = table.row($tr).data();
+            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+        });
+
+        // Delete a record
+        table.on('click', '.remove', function(e) {
+            $tr = $(this).closest('tr');
+            table.row($tr).remove().draw();
+            e.preventDefault();
+        });
+
+        //Like record
+        table.on('click', '.like', function() {
+            alert('You clicked on Like button');
+        });
+
+        $('.card .material-datatables label').addClass('form-group');
+    });
+
+
+</script>
+
+
+
+{% endblock aditional_scripts %}
+
+
+
