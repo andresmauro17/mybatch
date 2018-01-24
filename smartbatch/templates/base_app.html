@@ -61,7 +61,10 @@
                                     <a href="#">Editar Perfil</a>
                                 </li>
                                 <li>
+                                    
+                                    {% comment  %}
                                     <a href="{% url 'account:logout'%}">Salir</a>
+                                    {% endcomment %}
                                 </li>
                             </ul>
                         </div>
@@ -89,10 +92,14 @@
                             <div class="collapse" id="configuracion">
                                 <ul class="nav">
                                     <li>
+                                        {% comment "" %}
                                         <a href="{% url 'config:equipment_list' %}">Equipos</a>
+                                        {% endcomment %}                                        
                                     </li>
                                     <li>
+                                        {% comment "" %}
                                         <a href="{% url 'config:material_list' %}">Material</a>
+                                        {% endcomment %}                                        
                                     </li>
                                 </ul>
                             </div>
@@ -155,7 +162,9 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
+                                        
                                         <a href="{% url 'account:logout' %}">Salir</a>
+                                                                              
                                     </li>
                                 </ul>
                             </li>

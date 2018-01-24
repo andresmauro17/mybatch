@@ -7,6 +7,8 @@ from django.shortcuts import render
 
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout as logout_django
 
 from django.shortcuts import redirect
 from django.views.generic import View
@@ -22,7 +24,7 @@ class LoginClass(View):
 
 	def get(self, request, *args, **kwargs):
 		if request.user.is_authenticated:			
-			return redirect('home')
+			return redirect('dashboard')
 		return render(request, self.template, self.get_contexto())
 
 	def post(self, request, *args, **kwargs):
@@ -32,7 +34,7 @@ class LoginClass(View):
 
 		if user is not None:
 			login_django(request,user)
-			return redirect('home')		
+			return redirect('dashboard')		
 		else:
 			self.message = "usuario o pasword incorrecto"
 		return render(request, self.template, self.get_contexto())
@@ -41,4 +43,10 @@ class LoginClass(View):
 		return{'form':self.form, 'message':self.message}
 
 
-	
+@login_required(login_url = 'account:login')
+def logout(request):
+	logout_django(request)
+	return redirect('home')
+
+def register(request):
+	return render(request, 'account/register.html')
