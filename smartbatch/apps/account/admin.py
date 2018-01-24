@@ -11,6 +11,7 @@ class EmpresaAdmin(admin.ModelAdmin):
     list_display = ['nombre','pais','nit', 'ciudad', 'direccion', 'telefono', 'sitioweb', 'mail', 'logo']
     list_editable = ['pais']
     ordering = ['nombre']
+    search_fields = ['nombre']
 
 @admin.register(models.Cliente)
 class ClienteAdmin(admin.ModelAdmin):
