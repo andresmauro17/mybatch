@@ -8,8 +8,8 @@ from django.contrib import admin
 
 @admin.register(models.Empresa)
 class EmpresaAdmin(admin.ModelAdmin):
-    list_display = ['nombre','pais','nit', 'ciudad', 'direccion', 'telefono', 'sitioweb', 'mail', 'logo']
-    list_editable = ['pais']
+    list_display = ['nombre','nit','pais', 'ciudad', 'direccion', 'telefono', 'sitioweb', 'mail', 'logo']
+    list_editable = []
     ordering = ['nombre']
     search_fields = ['nombre']
 
